@@ -1,0 +1,48 @@
+.container{
+    background: linear-gradient(65deg, white 0%, white 40%, rgb(2,70,143) 40%, rgb(2,70,143) 100%);
+    margin-top: 50px;
+    /* 自己设置一下适宜的宽度和高度 */
+    height: 750px;
+    width: 1900px;
+    overflow: hidden;
+}
+
+.container .box{
+    margin-top: 4%;
+    margin-left:25%;
+    width:50%;
+    height: 80%;
+    border-radius:2%;
+}
+
+.container .box .left{
+    width: 30%;
+    height: 100%;
+    background-image: url(../../assets/image/slideshow/1.jpg);
+    border-radius: 3% 0 0 3%;
+    /* background-repeat:no-repeat;
+    background-size:100% 100%;
+    -moz-background-size:100% 100% */
+    float:left;
+    overflow: hidden;
+}
+
+.container .box .right{
+    width: 70%;
+    height: 100%;
+    background-color: white;
+    margin-left: 30%;
+    overflow: hidden;
+}
+
+.container .box .right .title{
+    width: 50%;
+    height: 7%;
+    margin-left: 10%;
+    margin-top: 20%;
+    background-color: white;
+    /* border: 1px solid black; */
+    font-family:Helvetica;
+    font-size:30px;
+}
+
