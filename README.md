@@ -1,6 +1,14 @@
 # LiblalyManane-Vue
-
-This template should help get you started developing with Vue 3 in Vite.
+注意事项：
+由于各个电脑的高度宽度不同，最大程度避免使用绝对数据来定位
+尽量使用百分比数据
+例如：
+margin-left: 100px （打咩）
+margin-left: 10%    (bingo)
+拉取后需要在项目中修改相应的位置高度：
+login.css ：5、6行
+index.css ：3、4行
+index.vue ：6行
 
 ## Recommended IDE Setup
 

@@ -1,13 +1,27 @@
 <template>
-    <navigationBar></navigationBar>
-    <div class="block text-center" m="t-4" style="width:60%;margin-left: 20%;">
-    <span class="demonstration">Switch when indicator is clicked</span>
-    <el-carousel trigger="click" height="200px">
+  <div class="container">
+    <div class="block text-center" m="t-4" style="width:100%;height:93%;">
+    <!-- 这个地方也需自行修改高度和宽度 -->
+    <el-carousel trigger="click" height="800px" style="">
       <el-carousel-item v-for="item in imgList" :key="item">
         <h3 class="small justify-center" text="2xl">{{ item.name }}</h3>
         <!-- <img :src="item.src" style="height:100%;width:100%;" alt="图片丢失了" :title="item.title" /> -->
       </el-carousel-item>
     </el-carousel>
+  </div>
+  <div class="info-container">
+    <el-text class="info" size="large">图书管理系统</el-text>
+    <el-text class="introduction">欢迎进入图书管理系统,点击下方按钮可进行图书扫描,扫描图书后携带的二维码</el-text>
+    <el-text class="introduction" style="margin-left:-40px;margin-top: 30px;">可以对该图书进行搜索</el-text>
+    <button class="scan">Scan</button>
+  </div>
+  <!-- 引入自定义组件 -->
+  <navigationBar style="background-color: rgba(255,255,255,0.6);"></navigationBar>
+  </div> 
+  <div class="info-addition">
+    <el-text class="head" size="large">什么是图书管理系统？</el-text>
+    <div style="margin-top: 20px;"></div>
+    <el-text class="content">我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊</el-text>
   </div>
 </template>
 
@@ -47,23 +61,28 @@ export default defineComponent({
 
   
 <style scoped>
-/* @import '../../assets/css/Login.css'; */
+@import '../../assets/css/index.css';
 .demonstration {
   color: var(--el-text-color-secondary);
 }
 
+.el-carousel{
+  --el-carousel-arrow-background: black;
+  --el-carousel-arrow-hover-background: black;
+}
 .el-carousel__item h3 {
   /* color: #475669; */
   color: white;
   opacity: 0.9;
-  line-height: 200px;
+  line-height: 300px;
+  font-size: 30px;
   margin: 0;
   text-align: center;
 }
 
 .el-carousel__item:nth-child(3) {
   background-image: url(../../assets/image/slideshow/1.jpg);
-  background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%
+  background-repeat:no-repeat; background-size:100% 100%;-moz-background-size:100% 100%;
 }
 
 .el-carousel__item:nth-child(4) {

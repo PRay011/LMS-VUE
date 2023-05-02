@@ -1,0 +1,67 @@
+.container{
+     /* 自己设置一下适宜的宽度和高度 */
+     height: 750px;
+     width: 1900px;
+     overflow: hidden;
+}
+
+.info-container{
+    position: absolute;
+    top:8.5px;
+    left:10px;
+    height:74.4%;
+    width:98.3%;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.container .info{
+    position: absolute;
+    top:30%;
+    left: 45.3%;
+    color:white;
+    font-size:30px
+}
+
+.container .introduction{
+    position: absolute;
+    top:40%;
+    left: 32%;
+    color:white;
+    font-size:20px
+}
+
+.container .scan{
+    position: absolute;
+    width:8%;
+    height:21%;
+    top:50%;
+    left: 46.5%;
+    border:1px solid transparent;
+    border-radius: 100%;
+    font-family: Arial;
+    font-size: 40px;
+    color:rgb(2,70,143);
+    background-color: rgba(255,255,255,0.8);
+    transition-duration: 0.5s;
+    /* border:1px solid white; */
+}
+
+.container .scan:hover{
+    color:white;
+    background-color: rgb(2,70,143,0.8);
+}
+
+.info-addition{
+    margin-top:30px;
+}
+
+.info-addition .head{
+    margin-left: 41%;
+    font-size: 30px;
+}
+
+.info-addition .content{
+    margin-left: 32%;
+    margin-top:20px;
+    font-size: 20px;
+}

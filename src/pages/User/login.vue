@@ -40,7 +40,7 @@
 
   
 <style scoped>
-@import '../../assets/css/Login.css';
+@import '../../assets/css/login.css';
 
 ::v-deep .el-input{
     width:60%;
