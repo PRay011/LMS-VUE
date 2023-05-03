@@ -1,0 +1,103 @@
+.container{
+    /* 自己设置一下适宜的宽度和高度 */
+    height: 860px;
+    width: 1890px;
+    overflow: hidden;
+}
+
+.container .head-image{
+    height:40%;
+    width:100%;
+    background-image: url(../../assets/image/slideshow/1.jpg);
+    /* background-repeat:no-repeat;
+    background-size:100% 100%;
+    -moz-background-size:100% 100% */
+}
+
+.container .head-content{
+    height:40%;
+    width:100%;
+    margin-top:-18.5%;
+    background-color:rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.container .head-content .title{
+    height:30%;
+    width:15%;
+    margin-left: 42.5%;
+    margin-top:6%;
+    color:white;
+    font-size: 40px;
+}
+
+.container .bottom{
+    /* margin-top: 10%; */
+    height:60%;
+    width:100%;
+    color:black;
+    font-size: 40px;
+    background-color: rgb(239,239,239);
+    overflow: hidden;
+}
+
+.container .bottom .book-image{
+    height:60%;
+    width:13%;
+    margin-left: 28%;
+    margin-top:4%;
+    color:black;
+    background-color: white;
+    float: left;
+    box-shadow:  5px 5px 10px #cecece,
+             -5px -5px 10px #f2f2f2;
+    overflow: hidden;
+}
+
+.container .bottom .book-image .image{
+    height:94%;
+    width:94%;
+    margin-left: 3%;
+    margin-top:3%;
+    color:black;
+    background-color: white;
+    float: left;
+   
+}
+
+.container .bottom .book-name{
+    height:10%;
+    width:20%;
+    margin-left: 45%;
+    margin-top:4.5%;
+    font-size:25px;
+    color:black;
+    /* background-color: white; */
+    overflow: hidden;
+}
+
+.container .bottom .book-name .name{
+    padding-top: 5%;
+    font-weight: 600;
+    font-size:25px;
+    color:black;
+    /* background-color: white; */
+    overflow: hidden;
+}
+
+.container .bottom .book-info{
+    height:30%;
+    width:30%;
+    margin-left: 45%;
+    margin-top:2%;
+    color:black;
+    background-color: white;
+    overflow: hidden;
+}
+
+.container .bottom .book-info .introduce{
+   width:90%;
+   margin-left: 1%;
+   line-height: 20px;
+   word-wrap: break-word;
+}

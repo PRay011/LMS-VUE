@@ -112,8 +112,8 @@
                 </el-col>
             </div>
             <div class="books">
-                <div class="book" v-for="book in books" :key="book.id">
-                    <img :src="book.src" class="book-img"  onerror="this.src='../../../public/1.jpg';this.οnerrοr=null;" /><br>
+                <div class="book" v-for="book in books" :key="book.id" @click="getBookDetails(book)">
+                    <img :src="book.src" class="book-image"  onerror="this.src='/1.jpg';this.οnerrοr=null;" /><br>
                     <div class="book-name">
                         <el-text class="book-name">{{ book.name }}</el-text>
                     </div>
@@ -140,64 +140,81 @@
               books:[
                 {
                     id: 1,
-                    name: '1',
+                    name: '太阳和蜉蝣',
                     src: "../../assets/image/slideshow/1.jpg",
+                    ISBN:'9787559725554',
                     introduce: '这是第一本书'
                 },
                 {
                     id: 2,
-                    name: '2',
+                    name: '安徽少年儿童出版社',
                     src: "../../assets/image/slideshow/2.jpg",
+                    ISBN:'978-7-5707-0457-6',
                     introduce: '这是第二本书'
                 },
                 {
                     id: 3,
                     name: '3',
                     src: "../../assets/image/slideshow/3.jpg",
+                    ISBN:'',
                     introduce: '这是第三本书'
                 },
                 {
                     id: 4,
                     name: '4',
                     src: "../../assets/image/slideshow/4.jpg",
+                    ISBN:'',
                     introduce: '这是第四本书'
                 },
                 {
-                    id: 1,
-                    name: '1',
+                    id: 5,
+                    name: '5',
                     src: "../../assets/image/slideshow/1.jpg",
-                    introduce: '这是第一本书'
+                    ISBN:'',
+                    introduce: '这是第五本书'
                 },
                 {
-                    id: 2,
-                    name: '2',
+                    id: 6,
+                    name: '6',
                     src: "../../assets/image/slideshow/2.jpg",
-                    introduce: '这是第二本书'
+                    ISBN:'',
+                    introduce: '这是第六本书'
                 },
                 {
-                    id: 3,
-                    name: '3',
+                    id: 7,
+                    name: '7',
                     src: "../../assets/image/slideshow/3.jpg",
-                    introduce: '这是第三本书'
+                    ISBN:'',
+                    introduce: '这是第七本书'
                 },
                 {
-                    id: 4,
-                    name: '4',
+                    id: 8,
+                    name: '8',
                     src: "../../assets/image/slideshow/4.jpg",
-                    introduce: '这是第四本书'
+                    ISBN:'',
+                    introduce: '这是第八本书'
                 },
                 {
-                    id: 4,
-                    name: '4',
+                    id: 9,
+                    name: '9',
                     src: "../../assets/image/slideshow/4.jpg",
-                    introduce: '这是第四本书'
+                    ISBN:'',
+                    introduce: '这是第九本书'
                 },
             ]
           }
       },
       components: {navigationBar},
+      mounted:function(){
+        
+      },
       methods: {
-          
+        getBookDetails(book){
+            let that = this;
+            console.log(book.id)
+            sessionStorage.setItem("book", JSON.stringify(book));
+            this.$router.push('/detail')
+          }
       },
   })
 </script>

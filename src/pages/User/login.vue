@@ -11,8 +11,8 @@
                 <div style="margin-top: 10px;"></div>
                 <el-text class="forget" type="primary">忘记密码？</el-text>
                 <div style="margin-top: 90px;"></div>
-                <el-button class="login">登录</el-button>
-                <el-button class="register">注册</el-button>
+                <el-button class="login" @click="login()">登录</el-button>
+                <el-button class="register" @click="register()">注册</el-button>
            </div>
         </div>
     </div>
@@ -33,7 +33,9 @@
       },
       components: {navigationBar},
       methods: {
-          
+        register(){
+            this.$router.push('/register')
+        }
       },
   })
 </script>
@@ -59,7 +61,7 @@
 }
 
 :deep .login{
-    margin-left: 10%;
+    margin-left: 20%;
     height: 7%;
     width: 20%;
     font-size:15px;

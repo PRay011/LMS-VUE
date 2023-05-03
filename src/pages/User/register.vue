@@ -1,88 +1,97 @@
 <template>
-    <div class="wrap">
-    <!-- 头部logo -->
-    <header class="header-wrap">
-        <div class="header-logo">
-            <a href="/jpetstore/">
-                <img src="../../assets/image/login/placeholder.png">
-            </a>
+    <navigationBar></navigationBar>
+    <div class="container">
+        <div class="box">
+           <div class="left">
+           </div>
+           <div class="right">
+                <div class="title">欢迎注册</div>
+                <el-input v-model="accout" placeholder="请输入账号" style="" />
+                <el-input v-model="password" placeholder="请输入密码" />
+                <el-input v-model="confirePassword" placeholder="请再次输入密码" />
+                <div style="margin-top: 10px;"></div>
+                <div style="margin-top: 90px;"></div>
+                <el-button class="login">注册</el-button>
+                <el-button class="register" @click="login()">登录</el-button>
+           </div>
         </div>
-    </header>
-    <!-- 主要内容 -->
-    <section class="main-wrap">
-        <div class="layout_panel">
-            <div class="mian-content">
-                <div class="nav_tabs" id="nav-tabs">
-                    <a class="navtab-link now" href="javascript: void(0);">注册</a>
-                </div>
-                <div class="loginbox">
-                    <div class="btn login_area">
-                        <div action="/jpetstore/User/register" autocomplete="off" id="registerForm" method="post">
-                            <input class="item_account" id="username" name="userId" placeholder="账号"
-                                   type="text">
-                            <div class="err_tip" id="name_repeat"></div>
-                            <input class="item_account" id="pwd" name="password" placeholder="密码"
-                                   type="password">
-                            <input class="item_account" id="password_repeat" name="password_repeat" placeholder="确认密码"
-                                    type="password">
-                            <input class="code_input" id="code" name="vCode" placeholder="验证码"
-                                   type="text">
-                            <a class="code_link">
-                                <img alt="验证码" class="code_img" id="verificationCode"
-                                     onclick="newVerification()" src="/jpetstore/verificationCode">
-                            </a>
-                            <div class="err_tip" id="errer">
-                                <span class="error-con" id="errorMessage"></span>
-                            </div>
-                            <button class="btnadpt item_account" onclick="register()">注册</button>
-                        </div>
-                        <div class="other_panel myclear">
-                            <div class="links_area">
-                                <router-link to="/login">已有账号？立即登录</router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- 底部声明 -->
-    <footer class="footer-wrap">
-        <div class="myclear">
-            <ul class="lang-select-list">
-                <li><a class="current" href="javascript: void(0);">简体</a>|</li>
-                <li><a href="javascript: void(0);">繁体</a>|</li>
-                <li><a href="javascript: void(0);">English</a>|</li>
-                <li><a href="javascript: void(0);">常见问题</a>|</li>
-                <li><a href="javascript: void(0);">隐私政策</a></li>
-            </ul>
-        </div>
-        <div class="footer-intro">
-            中南大学版权所有
-        </div>
-    </footer>
-</div>
+    </div>  
+</template>
 
-    </template>
 <script>
-      import { defineComponent } from "vue"
-      import '../../utils/register.js'
+    import { defineComponent } from "vue"
+    import '../../utils/register.js'
+    import navigationBar from '../../components/header.vue'
       
-      export default defineComponent({
-          name: "register",
-          data(){
-              return {
-                  data:''
-              }
-          },
-          methods: {
-              
-          },
-      })
-  </script>
+    export default defineComponent({
+        name: "register",
+        data(){
+            return {
+              accout:'',
+              password:'',
+            }
+        },
+        components: {navigationBar},
+        methods: {
+            login(){
+                this.$router.push('/login')
+            }
+        },
+    })
+</script>
 
   
 <style scoped>
-@import '../../assets/css/Login.css';
+@import '../../assets/css/register.css';
+
+::v-deep .el-input{
+    width:60%;
+    height:7%;
+    margin-top:2%;
+    margin-left: 10%;
+    font-size:17px;
+
+}
+.el-input >>> .el-input__inner {
+    width:100px;
+} 
+
+.forget{
+    margin-left: 10%;
+}
+
+::v-deep .login{
+    margin-left: 20%;
+    height: 7%;
+    width: 20%;
+    font-size:15px;
+    color:white;
+    border:1px solid white;
+    background-color:rgb(178, 135, 99);
+}
+
+.login:hover{
+    color:rgb(178, 135, 99);
+    background-color:white;
+    border:1px solid rgb(178, 135, 99);
+    transition-duration: 0.5s;
+}
+
+::v-deep .register{
+    margin-left: 7%;
+    height: 7%;
+    width: 20%;
+    font-size:15px;
+    color:rgb(178, 135, 99);
+    border:1px solid rgb(178, 135, 99);
+    background-color:white;
+}
+
+.register:hover{
+    color:white;
+    background-color:rgb(178, 135, 99);
+    border:1px solid white;
+    transition-duration: 0.5s;
+}
 
 </style>

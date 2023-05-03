@@ -13,37 +13,36 @@ const router = createRouter({
             import ('../pages/Home/index.vue'),   
       },
       { 
-        //path属性是url的地址
         path:'/login',
-        //component属性就是显示的组件名称
         name: "login",
         component: () =>
             import ('../pages/User/login.vue'),
       },
       { 
-        //path属性是url的地址
         path:'/register',
-        //component属性就是显示的组件名称
         name: "register",
         component: () =>
             import ('../pages/User/register.vue'),
       },
       { 
-        //path属性是url的地址
         path:'/selfCenter',
-        //component属性就是显示的组件名称
         name: "selfCenter",
         component: () =>
             import ('../pages/User/selfCenter.vue'),
       }, 
       { 
-        //path属性是url的地址
         path:'/library',
-        //component属性就是显示的组件名称
         name: "library",
         component: () =>
             import ('../pages/Library/library.vue'),
       }, 
+      {
+        // path: '/detial/:id', // /:id 对应携带的参数，子组件即可获取传递的参数值。获取方式：this.$route.params.id
+        path: '/detail',
+        name: 'detail',
+        component: () =>
+            import ('../pages/Library/detail.vue'),
+      }
     ],
 })
 export default router;
