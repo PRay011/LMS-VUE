@@ -44,7 +44,7 @@
 <style scoped>
 @import '../../assets/css/register.css';
 
-::v-deep .el-input{
+:deep .el-input{
     width:60%;
     height:7%;
     margin-top:2%;
@@ -60,7 +60,7 @@
     margin-left: 10%;
 }
 
-::v-deep .login{
+:deep .login{
     margin-left: 20%;
     height: 7%;
     width: 20%;
@@ -77,7 +77,7 @@
     transition-duration: 0.5s;
 }
 
-::v-deep .register{
+:deep .register{
     margin-left: 7%;
     height: 7%;
     width: 20%;

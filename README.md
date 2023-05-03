@@ -8,6 +8,7 @@ margin-left: 10%    (bingo)
 拉取后需要在项目中修改相应的位置高度：
 login.css ：5、6行
 index.css ：3、4行
+index.css : 67行
 index.vue ：6行
 library.css : 3、4行
 

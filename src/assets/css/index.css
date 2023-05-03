@@ -5,37 +5,48 @@
      overflow: hidden;
 }
 
-.info-container{
-    position: absolute;
-    top:8.5px;
-    left:9px;
-    height:74.4%;
-    width:98.9%;
+.container .info-container{
+    position: relative;
+    /* top:8.5px; */
+    margin-top: -37%;
+    /* left:9px; */
+    height:93%;
+    width:100%;
     background-color: rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 
-.container .info{
-    position: absolute;
-    top:30%;
-    left: 45.3%;
+.container .info-container .info{
+    /* position: absolute; */
+    margin-top:13%;
+    margin-left: 26.3%;
     color:white;
     font-size:30px
 }
 
-.container .introduction{
-    position: absolute;
-    top:40%;
-    left: 32%;
+.container .info-container .introduction{
+    /* position: absolute; */
+    margin-top:2%;
+    margin-left: 18%;
     color:white;
     font-size:20px
 }
 
-.container .scan{
-    position: absolute;
+.container .info-container .introduction2{
+    /* position: absolute; */
+    margin-left: 12%;
+    margin-top: 30px;
+    
+    color:white;
+    font-size:20px
+}
+
+.container .info-container .scan{
+    /* position: absolute; */
     width:8%;
     height:21%;
-    top:50%;
-    left: 46.5%;
+    margin-top:1%;
+    margin-left: 46.5%;
     border:1px solid transparent;
     border-radius: 100%;
     font-family: Arial;
@@ -46,12 +57,14 @@
     /* border:1px solid white; */
 }
 
-.container .scan:hover{
+.container .info-container .scan:hover{
     color:white;
     background-color: rgba(2,70,143,0.8);
 }
 
 .info-addition{
+    /* height: 750px; */
+    width: 1900px;
     margin-top:30px;
 }
 

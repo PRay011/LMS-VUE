@@ -44,7 +44,7 @@
 <style scoped>
 @import '../../assets/css/login.css';
 
-::v-deep .el-input{
+:deep .el-input{
     width:60%;
     height:7%;
     margin-top:2%;
