@@ -8,9 +8,9 @@
 .info-container{
     position: absolute;
     top:8.5px;
-    left:10px;
+    left:9px;
     height:74.4%;
-    width:98.3%;
+    width:98.9%;
     background-color: rgba(0,0,0,0.3);
 }
 
@@ -48,7 +48,7 @@
 
 .container .scan:hover{
     color:white;
-    background-color: rgb(2,70,143,0.8);
+    background-color: rgba(2,70,143,0.8);
 }
 
 .info-addition{

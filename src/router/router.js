@@ -36,6 +36,14 @@ const router = createRouter({
         component: () =>
             import ('../pages/User/selfCenter.vue'),
       }, 
+      { 
+        //path属性是url的地址
+        path:'/library',
+        //component属性就是显示的组件名称
+        name: "library",
+        component: () =>
+            import ('../pages/Library/library.vue'),
+      }, 
     ],
 })
 export default router;
