@@ -213,7 +213,7 @@
             let that = this;
             console.log(book.id)
             sessionStorage.setItem("book", JSON.stringify(book));
-            this.$router.push('/detail')
+            that.$router.push('/detail')
           }
       },
   })

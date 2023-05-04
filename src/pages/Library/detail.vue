@@ -53,6 +53,8 @@
             whichBook(){
                 let that = this;
                 let book = JSON.parse(sessionStorage.getItem("book"));
+                let target = JSON.parse(sessionStorage.getItem("scanText"));
+                console.log(target)
                 that.name = book.name;
                 that.intriduce = book.introduce;
                 that.imgSrc = book.src; 

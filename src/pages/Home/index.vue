@@ -18,7 +18,7 @@
       <el-text class="introduction2" style="">可以对该图书进行搜索</el-text>
     </div>
     
-    <button class="scan">Scan</button>
+    <button class="scan" @click="scanCode()">Scan</button>
   </div>
   <!-- 引入自定义组件 -->
   <navigationBar style="background-color: rgba(255,255,255,0.6);"></navigationBar>
@@ -59,7 +59,12 @@ export default defineComponent({
     },
     components: {navigationBar},
     methods: {
-        
+      scanCode() {
+        console.log('浏览器信息', navigator.userAgent);
+        this.$router.push({
+          path: '/scan'
+        });
+      }
     },
 })
 </script>
