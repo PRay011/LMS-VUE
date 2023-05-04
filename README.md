@@ -11,6 +11,8 @@ index.css ：3、4行
 index.css : 67行
 index.vue ：6行
 library.css : 3、4行
+selfCenter.css : 2、3、82行
+selfCenter: 21、53行....(还有几个类似的自己看着办吧qwq)
 
 ## Recommended IDE Setup
 

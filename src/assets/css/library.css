@@ -1,4 +1,5 @@
 .container{
+    /* margin-top: 1px; */
     /* 自己设置一下适宜的宽度和高度 */
     height: 1800px;
     width: 1890px;
@@ -51,9 +52,9 @@
 }
 
 .container .bottom .navigation{
-    margin-left: 19%;
+    margin-left: 17%;
     height:50%;
-    width:15%;
+    width:17%;
     margin-top:3%;
     color:white;
     font-size: 40px;
@@ -86,7 +87,7 @@
 
 .container .bottom .books .book{
     height:27%;
-    width:27%;
+    width:29%;
     margin-left: 3%;
     margin-top:6%;
     color:white;

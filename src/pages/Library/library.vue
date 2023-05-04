@@ -22,7 +22,7 @@
                 <el-col :span="20">
                 <h5 class="category-title">图书分类</h5>
                 <el-menu
-                    default-active="2"
+                    default-active="1"
                     class="el-menu-vertical-demo"
                     @open="handleOpen"
                     @close="handleClose"

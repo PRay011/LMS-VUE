@@ -9,8 +9,7 @@
                 <el-input v-model="accout" placeholder="请输入账号" style="" />
                 <el-input v-model="password" placeholder="请输入密码" />
                 <el-input v-model="confirePassword" placeholder="请再次输入密码" />
-                <div style="margin-top: 10px;"></div>
-                <div style="margin-top: 90px;"></div>
+                <div style="margin-top: 65px;"></div>
                 <el-button class="login">注册</el-button>
                 <el-button class="register" @click="login()">登录</el-button>
            </div>
