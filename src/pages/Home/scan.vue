@@ -1,5 +1,4 @@
 <template>
-  <navigationBar></navigationBar>
     <div class="page-scan">
       <!--返回-->
       <van-nav-bar title="扫描二维码/条形码" fixed
@@ -21,7 +20,6 @@
   import { defineComponent } from "vue" 
   import { BrowserMultiFormatReader } from '@zxing/library';
   import { Dialog, Notify } from 'vant';
-  import navigationBar from '../../components/header.vue'
 
     export default defineComponent({
       name: 'scanCodePage',
@@ -50,7 +48,6 @@
           }
         }
       },
-      components: {navigationBar},
       methods: {
         async openScan() {
           this.codeReader.getVideoInputDevices().then((videoInputDevices) => {
@@ -113,7 +110,7 @@
               if (this.scanText) {
                 this.codeReader.reset();
                 this.tipShow = false;
-                sessionStorage.setItem("scanText", JSON.stringify(that.scanText));
+                sessionStorage.setItem("search", JSON.stringify(that.scanText));
                 this.codeReader = null;
                 this.$router.push('/search');
                 

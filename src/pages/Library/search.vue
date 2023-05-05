@@ -16,6 +16,7 @@
                    </el-button>
                 </template>
             </el-input>
+            <el-text style="color:white;margin-left: 10px;font-size:20px">{{bookName}}</el-text>
         </div>
         <div class="bottom">
             <div class="books" style="margin-left: 25%;">
@@ -44,6 +45,7 @@
           return {
               searchContent:'',
               bookNumber:9,
+              bookName:'',
               books:[
                 {
                     id: 1,
@@ -117,7 +119,9 @@
       },
       methods: {
         ready(){
+            let that = this;
             let bookName = JSON.parse(sessionStorage.getItem("search"));
+            this.bookName = bookName;
             console.log(bookName)
         },
         getBookDetails(book){

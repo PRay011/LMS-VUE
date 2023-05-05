@@ -17,7 +17,6 @@
       <el-text class="introduction">欢迎进入图书管理系统,点击下方按钮可进行图书扫描,扫描图书后携带的二维码</el-text><br>
       <el-text class="introduction2" style="">可以对该图书进行搜索</el-text>
     </div>
-    
     <button class="scan" @click="scanCode()">Scan</button>
   </div>
   <!-- 引入自定义组件 -->

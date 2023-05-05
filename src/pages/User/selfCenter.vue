@@ -458,6 +458,27 @@
             },
             //我的书籍按钮
             bookEdit ( index, row) {
+                this.$prompt('修改屠宰数量', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消'
+			})
+				.then(({ value }) => {
+					this.$message({
+						type: 'success',
+						message: '修改成功！'
+					});
+					// val.tuzai = value;
+					// // console.log('修改为',value,'行',indexs);
+					// this.tableData[indexs].tuzai = JSON.parse(value);
+					// val.tuzai = JSON.parse(value);
+					// this.$set(this.tableData, indexs, val);
+				})
+				.catch(() => {
+					this.$message({
+						type: 'info',
+						message: '取消输入'
+					});
+				});
                 console.log('修改');
                 console.log(index, row)
             },
