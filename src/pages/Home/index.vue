@@ -26,6 +26,22 @@
     <el-text class="head" size="large">什么是图书管理系统？</el-text>
     <div style="margin-top: 20px;"></div>
     <el-text class="content">我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊</el-text>
+    <div class="recommend">
+      <div class="recommend-title">
+        <el-text style="font-size:30px;margin-left: 2%;">推荐书目</el-text>
+      </div>
+      <div class="recommend-content">
+        <div class="book" v-for="book in recommend" :key="book.id" @click="getBookDetails(book)">
+          <img :src="book.src" class="book-image"  onerror="this.src='/1.jpg';this.οnerrοr=null;" /><br>
+            <div class="book-name">
+              <el-text class="book-name">{{ book.name }}</el-text>
+            </div>
+            <div class="book-owner">
+            <el-text class="book-owner">提供方: {{ book.owner }}</el-text>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,7 +69,74 @@ export default defineComponent({
           name: "book4",
         }
       ],
-        data:''
+      recommend:[
+        {
+          id:1,
+          src:"1.jpg",
+          introduce:"无",
+          ISBN:"1234567890123",
+          lenderid:" ",
+          name:"test book",
+          owner:"sadmin",
+          status:1,
+          type:"计算机，软件"
+        },
+        {
+          id:2,
+          src:"4.jpg",
+          introduce:"无",
+          ISBN:"1234567890123",
+          lenderid:" ",
+          name:"test book",
+          owner:"sadmin",
+          status:1,
+          type:"计算机，软件"
+        },
+        {
+          id:3,
+          src:"1.jpg",
+          introduce:"无",
+          ISBN:"1234567890123",
+          lenderid:" ",
+          name:"test book",
+          owner:"sadmin",
+          status:1,
+          type:"计算机，软件"
+        },
+        {
+          id:1,
+          src:"1.jpg",
+          introduce:"无",
+          ISBN:"1234567890123",
+          lenderid:" ",
+          name:"test book",
+          owner:"sadmin",
+          status:1,
+          type:"计算机，软件"
+        },
+        {
+          id:2,
+          src:"4.jpg",
+          introduce:"无",
+          ISBN:"1234567890123",
+          lenderid:" ",
+          name:"test book",
+          owner:"sadmin",
+          status:1,
+          type:"计算机，软件"
+        },
+        {
+          id:3,
+          src:"1.jpg",
+          introduce:"无",
+          ISBN:"1234567890123",
+          lenderid:" ",
+          name:"test book",
+          owner:"sadmin",
+          status:1,
+          type:"计算机，软件"
+        }
+      ]
     }
     },
     components: {navigationBar},
@@ -63,6 +146,12 @@ export default defineComponent({
         this.$router.push({
           path: '/scan'
         });
+      },
+      getBookDetails(book){
+        let that = this;
+        console.log(book.id)
+        sessionStorage.setItem("book", JSON.stringify(book));
+        that.$router.push('/detail')
       }
     },
 })

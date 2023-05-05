@@ -108,11 +108,22 @@
 }
 
 .container .bottom .books .book .book-name{
-    height: 10%;
+    height: 3%;
     width: 100%;
     margin: auto;
-    margin-top:3%;
+    margin-top:2%;
     font-size: 20px;
+    font-weight: 600;
+    color:black;
+    text-align: center;  
+}
+
+.container .bottom .books .book .book-owner{
+    height: 5%;
+    width: 100%;
+    margin: auto;
+    margin-top:6%;
+    font-size: 15px;
     color:black;
     text-align: center;  
 }

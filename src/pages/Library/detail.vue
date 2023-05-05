@@ -20,18 +20,51 @@
                     <el-text>ISBN:</el-text>
                     <el-text type="primary">  {{ ISBN }}</el-text>
                 </div>
+                <div style="margin-top: -3%;"> 
+                    <el-text>拥有者:</el-text>
+                    <el-text type="primary">  {{ owner }}</el-text>
+                </div>
                 <div class="introduce">
                     <el-text>简介:</el-text>
-                    <el-text type="primary">  {{ intriduce }}</el-text>
+                    <el-text type="primary">  {{ introduce }}</el-text>
                 </div>
-               
             </div>
+            <el-button color="#626aef" :dark="isDark" plain style="margin-left: 29%;" @click="openChat()">在线交流</el-button>
             <div class="buttons">
-                <el-button type="primary" size="large" style="mwidth:6%">在线阅读</el-button>
+                <el-button type="primary" size="large" style="width:6%">在线阅读</el-button>
                 <el-button type="success" size="large" style="margin-left: 2%; width:6%">借书</el-button>
             </div>
         </div>
     </div>
+    <el-drawer v-model="chatStatus" title="I am the title" :direction="direction" :size="'80%'"  style="width:1000px;margin-top: 5%;margin-left: 25%;">
+    <template #header>
+      <h4>聊天界面</h4>
+    </template>
+    <div class="chat-top">
+        <el-scrollbar height="100%">
+            <div v-for="item in chatRecords" :key="item.id" class="item">
+                <div class="item-left" v-if="item.speakerid == owner">
+                    <span class="left-name">{{ item.speakerid }}:</span>
+                    <span class="left-content">{{ item.message }}</span>
+                </div>
+                <div class="item-right" v-if="item.speakerid != owner">
+                    <span class="right-name">:{{ item.speakerid }}</span>
+                    <span class="right-content">{{ item.message }}</span>
+                </div>
+            </div>
+        </el-scrollbar>
+    </div>
+    <div class="chat-bottom">
+        <el-input
+            v-model="message_new"
+            :rows="6"
+            type="textarea"
+            placeholder="请输入"
+        />
+        <el-button type="primary" size="large" class="send" @click="sendMessage()">发送</el-button>
+        
+    </div>
+  </el-drawer>
 </template>
 
 <script>
@@ -43,10 +76,30 @@
         name: "detail",
         data(){
             return {
+              direction:'ttb',
+              chatStatus:false,
               name:'',
-              intriduce:'',
+              introduce:'',
               imgSrc:'',
               ISBN:'',
+              owner:'',
+              message_new:'',
+              chatRecords:[
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"pr",
+                speakerid:"小王"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"小王",
+                speakerid:"pr"
+              },
+              ]
             }
         },
         components: {navigationBar},
@@ -60,12 +113,20 @@
                 let target = JSON.parse(sessionStorage.getItem("scanText"));
                 console.log(target)
                 that.name = book.name;
-                that.intriduce = book.introduce;
+                that.introduce = book.introduce;
                 that.imgSrc = book.src; 
                 that.ISBN = book.ISBN;
+                that.owner = book.owner;
                 console.log('detail');
             },
-            
+            openChat(){
+                this.chatStatus = true
+            },
+            sendMessage(){
+                let that = this;
+                let message = that.message_new;
+                console.log(message);
+            }
         },
     })
 </script>
@@ -77,6 +138,16 @@
 :deep .el-text{
     font-size:17px;
     margin-left: 3%;
+}
+
+:deep .el-drawer__container {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100;
+    width: 100px;
 }
 
 </style>

@@ -16,7 +16,6 @@
                    </el-button>
                 </template>
             </el-input>
-            <el-text style="color:white;margin-left: 10px;font-size:20px">{{bookName}}</el-text>
         </div>
         <div class="bottom">
             <div class="books" style="margin-left: 25%;">
@@ -24,6 +23,9 @@
                     <img :src="book.src" class="book-image"  onerror="this.src='/1.jpg';this.οnerrοr=null;" /><br>
                     <div class="book-name">
                         <el-text class="book-name">{{ book.name }}</el-text>
+                    </div>
+                    <div class="book-owner">
+                        <el-text class="book-owner">提供方: {{ book.owner }}</el-text>
                     </div>
                 </div>
                 <div class="example-pagination-block">
@@ -52,63 +54,72 @@
                     name: '太阳和蜉蝣',
                     src: "../../assets/image/slideshow/1.jpg",
                     ISBN:'9787559725554',
-                    introduce: '这是第一本书'
+                    introduce: '这是第一本书',
+                    owner: '小王'
                 },
                 {
                     id: 2,
                     name: '安徽少年儿童出版社',
                     src: "../../assets/image/slideshow/2.jpg",
                     ISBN:'978-7-5707-0457-6',
-                    introduce: '这是第二本书'
+                    introduce: '这是第二本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 3,
                     name: '3',
                     src: "../../assets/image/slideshow/3.jpg",
                     ISBN:'',
-                    introduce: '这是第三本书'
+                    introduce: '这是第三本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 4,
                     name: '4',
                     src: "../../assets/image/slideshow/4.jpg",
                     ISBN:'',
-                    introduce: '这是第四本书'
+                    introduce: '这是第四本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 5,
                     name: '5',
                     src: "../../assets/image/slideshow/1.jpg",
                     ISBN:'',
-                    introduce: '这是第五本书'
+                    introduce: '这是第五本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 6,
                     name: '6',
                     src: "../../assets/image/slideshow/2.jpg",
                     ISBN:'',
-                    introduce: '这是第六本书'
+                    introduce: '这是第六本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 7,
                     name: '7',
                     src: "../../assets/image/slideshow/3.jpg",
                     ISBN:'',
-                    introduce: '这是第七本书'
+                    introduce: '这是第七本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 8,
                     name: '8',
                     src: "../../assets/image/slideshow/4.jpg",
                     ISBN:'',
-                    introduce: '这是第八本书'
+                    introduce: '这是第八本书',
+                    owner: '图书馆'
                 },
                 {
                     id: 9,
                     name: '9',
                     src: "../../assets/image/slideshow/4.jpg",
                     ISBN:'',
-                    introduce: '这是第九本书'
+                    introduce: '这是第九本书',
+                    owner: '图书馆'
                 },
             ]
           }

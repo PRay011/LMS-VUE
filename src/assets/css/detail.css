@@ -108,4 +108,79 @@
     margin-top: 5%;
     line-height: 20px;
     word-wrap: break-word;
- }
+}
+
+.chat-top{
+    /* margin-top:-1%; */
+    height:63%;
+    width:100%;
+    border:1px solid black;
+}
+
+.chat-top .item{
+    height:50px;
+    width:100%;
+}
+
+.chat-top .item .item-left{
+   height:100%;
+   width:100%;
+}
+
+.chat-top .item .item-left .left-name{
+    margin-top:10px;
+    height:30px;
+    line-height: 30px;
+    padding-right: 10px;
+    float: left;
+    margin-left: 1%;
+}
+
+.chat-top .item .item-left .left-content{
+    margin-top:10px;
+    height:30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+    border:1px solid black;
+    border-radius: 10%;
+}
+
+.chat-top .item .item-right{
+    height:100%;
+    width:100%;
+}
+
+.chat-top .item .item-right .right-name{
+    margin-top:10px;
+    height:30px;
+    line-height: 30px;
+    padding-right: 10px;
+    float: right;
+    margin-left: 1%;
+}
+
+.chat-top .item .item-right .right-content{
+    margin-top:10px;
+    height:30px;
+    line-height: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    float: right;
+    border:1px solid black;
+    border-radius: 10%;
+}
+
+.chat-bottom{
+    margin-top:2%;
+    height:33%;
+    width:100%;
+    /* border:1px solid black; */
+}
+
+.send{
+    width:10%;
+    margin-top:2%;
+    margin-left: 80%;
+}

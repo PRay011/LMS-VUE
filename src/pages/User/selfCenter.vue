@@ -13,6 +13,7 @@
             maxlength="20"
             placeholder="编辑个性签名"
             type="text"
+            input-style="color:white"
             /></div>
         </div>
         <div class="bottom">
@@ -76,6 +77,9 @@
                 </template>
                 </el-table-column>
                 <el-table-column align="right">
+                    <template #header>
+                        <el-button type="primary" @click="addNew()">新增</el-button>
+                    </template>
                 <template #default="scope">
                     <el-button
                     type="default"
@@ -166,11 +170,86 @@
         </el-tabs>
         </div>
     </div>
+    <el-drawer
+    ref="drawerRef"
+    v-model="left_drawer"
+    title="I have a nested form inside!"
+    :before-close="handleClose"
+    direction="ltr"
+    class="demo-drawer"
+  >
+    <div class="demo-drawer__content">
+      <el-form :model="editForm">
+        <el-form-item label=""  :label-width="formLabelWidth">  
+            <!-- <el-input v-model="editForm.image" height="300" name="image" type="file"/> -->
+            <img :src="editForm.image" width="200" height="300" class="head_pic"/>  
+            <el-button type="primary" style="margin-top: 59%;margin-left: 10%;" @click="uploadChange()">选择图片</el-button>
+        </el-form-item>
+        <el-form-item label="书名" :label-width="formLabelWidth">
+          <el-input v-model="editForm.bookName" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="ISBN" :label-width="formLabelWidth">
+          <el-input v-model="editForm.ISBN" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="种类" :label-width="formLabelWidth">
+          <el-input v-model="editForm.category" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="简介" :label-width="formLabelWidth">
+          <el-input v-model="editForm.introduce" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <div class="demo-drawer__footer" >
+        <el-button @click="cancelEdit" size="large">取消</el-button>
+        <el-button type="primary" :loading="loading" size="large" @click="comfirmEdit">{{
+          loading ? 'Submitting ...' : '确认'
+        }}</el-button>
+      </div>
+    </div>
+    </el-drawer>
+    <el-drawer
+    ref="drawerRef"
+    v-model="right_drawer"
+    title="I have a nested form inside!"
+    :before-close="handleClose"
+    direction="rtl"
+    class="demo-drawer"
+  >
+    <div class="demo-drawer__content">
+      <el-form :model="addForm">
+        <el-form-item label=""  :label-width="formLabelWidth">  
+            <!-- <el-input v-model="editForm.image" height="300" name="image" type="file"/> -->
+            <img :src="addForm.image" width="200" height="300" class="head_pic"/>  
+            <el-button type="primary" style="margin-top: 59%;margin-left: 10%;" @click="uploadAdd()">选择图片</el-button>
+        </el-form-item>
+        <el-form-item label="书名" :label-width="formLabelWidth">
+          <el-input v-model="addForm.bookName" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="ISBN" :label-width="formLabelWidth">
+          <el-input v-model="addForm.ISBN" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="种类" :label-width="formLabelWidth">
+          <el-input v-model="addForm.category" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="简介" :label-width="formLabelWidth">
+          <el-input v-model="addForm.introduce" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <div class="demo-drawer__footer" >
+        <el-button @click="cancelAdd" size="large">取消</el-button>
+        <el-button type="primary" :loading="loading" size="large" @click="comfirmAdd">{{
+          loading ? 'Submitting ...' : '确认'
+        }}</el-button>
+      </div>
+    </div>
+    </el-drawer>
 </template>
 <script>
       import {computed, defineComponent } from "vue"
       import '../../utils/selfCenter.js'
       import navigationBar from '../../components/header.vue'
+
+
+      
 
       export default defineComponent({
           name: "selfCenter",
@@ -180,6 +259,23 @@
                     name:'你',
                     introduce:'这是一个自我介绍',
                     tabPosition : 'left',
+                    left_drawer:false,
+                    right_drawer:false,
+                    formLabelWidth:'80px',
+                    editForm:{
+                            bookName: '',
+                            ISBN: '',
+                            category: '',
+                            introduce: '',
+                            image: '',
+                    },
+                    addForm:{
+                            bookName: '',
+                            ISBN: '',
+                            category: '',
+                            introduce: '',
+                            image: '',
+                    },
                     borrowRecords: [
                         {
                             startDate: '2023-05-03',
@@ -457,31 +553,65 @@
                 console.log(index, row)
             },
             //我的书籍按钮
+            //修改
             bookEdit ( index, row) {
-                this.$prompt('修改屠宰数量', '提示', {
-				confirmButtonText: '确定',
-				cancelButtonText: '取消'
-			})
-				.then(({ value }) => {
-					this.$message({
-						type: 'success',
-						message: '修改成功！'
-					});
-					// val.tuzai = value;
-					// // console.log('修改为',value,'行',indexs);
-					// this.tableData[indexs].tuzai = JSON.parse(value);
-					// val.tuzai = JSON.parse(value);
-					// this.$set(this.tableData, indexs, val);
-				})
-				.catch(() => {
-					this.$message({
-						type: 'info',
-						message: '取消输入'
-					});
-				});
-                console.log('修改');
-                console.log(index, row)
+                this.editForm.image= row.image;
+                this.editForm.ISBN = row.ISBN;
+                this.editForm.category = row.category;
+                this.editForm.bookName = row.bookName;
+                this.editForm.introduce = row.introduce;
+                this.left_drawer = true
             },
+            comfirmEdit(){
+                this.left_drawer = false
+            },
+            cancelEdit(){
+                this.left_drawer = false
+            },
+            uploadChange(){
+                let that = this;
+                let input = document.createElement("input");
+                input.setAttribute("type", "file");
+                // 支持多选
+                input.accept = "image/*";
+                input.addEventListener("change", (e) => {
+                    let file = e.path[0].files[0];
+                    // 浏览器兼容性处理（有的浏览器仅存在 Window.URL）
+                    const windowURL = window.URL || window.webkitURL;
+                    // createObjectURL 函数会根据传入的参数创建一个指向该参数对象的URL
+                    let filePath = windowURL.createObjectURL(file);
+                    that.editForm.image = filePath;
+                });
+                input.click();
+            },
+            //添加新书
+            addNew(){
+                let that = this;
+                that.right_drawer = true;
+            },
+            comfirmAdd(){
+                this.right_drawer = false
+            },
+            cancelAdd(){
+                this.right_drawer = false
+            },
+            uploadAdd(){
+                let that = this;
+                let input = document.createElement("input");
+                input.setAttribute("type", "file");
+                // 支持多选
+                input.accept = "image/*";
+                input.addEventListener("change", (e) => {
+                    let file = e.path[0].files[0];
+                    // 浏览器兼容性处理（有的浏览器仅存在 Window.URL）
+                    const windowURL = window.URL || window.webkitURL;
+                    // createObjectURL 函数会根据传入的参数创建一个指向该参数对象的URL
+                    let filePath = windowURL.createObjectURL(file);
+                    that.addForm.image = filePath;
+                });
+                input.click();
+            },
+           
             bookComfirm ( index, row) {
                 console.log('确认借出');
                 console.log(index, row)
@@ -513,7 +643,7 @@
     background-color: transparent !important;
   /* border: 1px solid #1296db;  */
     border: 1px solid transparent; 
-    color:white
+    color:black
 }
 
 :deep .el-input__inner::placeholder {
@@ -539,6 +669,10 @@
 
 :deep .search{
     color:black
+}
+
+.demo-drawer__footer{
+    margin-left: 35%;
 }
 
 </style>
