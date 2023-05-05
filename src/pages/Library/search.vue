@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="example-pagination-block">
-                    <el-pagination background layout="prev, pager, next" :total="bookNumber" :page-size="9"/>
+                    <el-pagination @current-change="handleSizeChange" background layout="prev, pager, next" :total="bookNumber" :page-size="9"/>
                 </div>
             </div>
         </div>
@@ -46,7 +46,8 @@
       data(){
           return {
               searchContent:'',
-              bookNumber:9,
+              bookNumber:100,
+              pageNumber:1,
               bookName:'',
               books:[
                 {
@@ -131,22 +132,99 @@
       methods: {
         ready(){
             let that = this;
+            let way = JSON.parse(sessionStorage.getItem("way"));
             let bookName = JSON.parse(sessionStorage.getItem("search"));
-            this.bookName = bookName;
-            console.log(bookName)
+            that.bookName = bookName;
+            let pageNumber = that.pageNumber;
+            if(way == 'search'){
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/guest/book/${encodeURIComponent(bookName)}/${pageNumber}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    //赋值给books
+                    that.books = [];
+                    let book = {};
+                    for(let i = 0;i < res.msg.books.length;i++){
+                    book.image = res.msg.books[i].image;
+                    book.introduce = res.msg.books[i].introduce;
+                    book.ISBN = res.msg.books[i].isbncode;
+                    book.owner = res.msg.books[i].ownerid;
+                    book.name = res.msg.books[i].name;
+                    book.id = res.msg.books[i].id;
+                    that.books.push(book);
+                    }
+                    //赋值给bookNumber
+                    that.bookNumber = res.msg.num;
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+            }
+            else if(way == 'scan'){
+                let config = {
+                method: 'get',
+                url: `http://localhost:5000/loginUser/scan/${bookName}/${pageNumber}`,
+                headers: {
+                },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    //赋值给books
+                    that.books = [];
+                    let book = {};
+                    for(let i = 0;i < res.msg.books.length;i++){
+                    book.image = res.msg.books[i].image;
+                    book.introduce = res.msg.books[i].introduce;
+                    book.ISBN = res.msg.books[i].isbncode;
+                    book.owner = res.msg.books[i].ownerid;
+                    book.name = res.msg.books[i].name;
+                    book.id = res.msg.books[i].id;
+                    that.books.push(book);
+                    }
+                    //赋值给bookNumber
+                    that.bookNumber = res.msg.num;
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+            }
+           
         },
+
         getBookDetails(book){
             let that = this;
             console.log(book.id)
             sessionStorage.setItem("book", JSON.stringify(book));
             that.$router.push('/detail')
         },
+
         search(){
             console.log("search")
             let bookName = this.searchContent;
             sessionStorage.setItem("search", JSON.stringify(bookName));
+            sessionStorage.setItem("way", JSON.stringify('search'));
             this.$router.push('/search')
-        }
+        },
+        
+        //获取页数
+        handleSizeChange(val){
+            this.pageNumber=val;
+            ready();
+        },
       },
   })
 </script>

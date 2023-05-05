@@ -49,6 +49,7 @@
 import { defineComponent } from "vue"
 import '../../utils/index.js'
 import navigationBar from '../../components/header.vue'
+import axios from "axios";
 
 export default defineComponent({
     name: "index",
@@ -68,85 +69,123 @@ export default defineComponent({
         {
           name: "book4",
         }
-      ],
-      recommend:[
-        {
-          id:1,
-          src:"1.jpg",
-          introduce:"无",
-          ISBN:"1234567890123",
-          lenderid:" ",
-          name:"test book",
-          owner:"sadmin",
-          status:1,
-          type:"计算机，软件"
-        },
-        {
-          id:2,
-          src:"4.jpg",
-          introduce:"无",
-          ISBN:"1234567890123",
-          lenderid:" ",
-          name:"test book",
-          owner:"sadmin",
-          status:1,
-          type:"计算机，软件"
-        },
-        {
-          id:3,
-          src:"1.jpg",
-          introduce:"无",
-          ISBN:"1234567890123",
-          lenderid:" ",
-          name:"test book",
-          owner:"sadmin",
-          status:1,
-          type:"计算机，软件"
-        },
-        {
-          id:1,
-          src:"1.jpg",
-          introduce:"无",
-          ISBN:"1234567890123",
-          lenderid:" ",
-          name:"test book",
-          owner:"sadmin",
-          status:1,
-          type:"计算机，软件"
-        },
-        {
-          id:2,
-          src:"4.jpg",
-          introduce:"无",
-          ISBN:"1234567890123",
-          lenderid:" ",
-          name:"test book",
-          owner:"sadmin",
-          status:1,
-          type:"计算机，软件"
-        },
-        {
-          id:3,
-          src:"1.jpg",
-          introduce:"无",
-          ISBN:"1234567890123",
-          lenderid:" ",
-          name:"test book",
-          owner:"sadmin",
-          status:1,
-          type:"计算机，软件"
-        }
-      ]
+            ],
+            recommend:[
+              {
+                id:1,
+                src:"1.jpg",
+                introduce:"无",
+                ISBN:"1234567890123",
+                lenderid:" ",
+                name:"test book",
+                owner:"sadmin",
+                status:1,
+                type:"计算机，软件"
+              },
+              {
+                id:2,
+                src:"4.jpg",
+                introduce:"无",
+                ISBN:"1234567890123",
+                lenderid:" ",
+                name:"test book",
+                owner:"sadmin",
+                status:1,
+                type:"计算机，软件"
+              },
+              {
+                id:3,
+                src:"1.jpg",
+                introduce:"无",
+                ISBN:"1234567890123",
+                lenderid:" ",
+                name:"test book",
+                owner:"sadmin",
+                status:1,
+                type:"计算机，软件"
+              },
+              {
+                id:1,
+                src:"1.jpg",
+                introduce:"无",
+                ISBN:"1234567890123",
+                lenderid:" ",
+                name:"test book",
+                owner:"sadmin",
+                status:1,
+                type:"计算机，软件"
+              },
+              {
+                id:2,
+                src:"4.jpg",
+                introduce:"无",
+                ISBN:"1234567890123",
+                lenderid:" ",
+                name:"test book",
+                owner:"sadmin",
+                status:1,
+                type:"计算机，软件"
+              },
+              {
+                id:3,
+                src:"1.jpg",
+                introduce:"无",
+                ISBN:"1234567890123",
+                lenderid:" ",
+                name:"test book",
+                owner:"sadmin",
+                status:1,
+                type:"计算机，软件"
+              }
+            ]
     }
     },
     components: {navigationBar},
+    mounted:function(){
+        this.ready()
+    },
     methods: {
+      ready(){
+        let that = this;
+        //公告放在哪
+        //推荐书目
+        let config = {
+            method: 'get',
+            url: 'http://localhost:5000/loginUser/recommendBooks',
+            headers: {
+            },
+          };
+        axios(config)
+        .then(function (response) {
+          let res = response.data
+          if (res.code === 200) {
+            //赋值给recommend
+            that.recommend = [];
+            let book = {};
+            for(let i = 0;i < res.msg.books.length;i++){
+              book.image = res.msg.books[i].image;
+              book.introduce = res.msg.books[i].introduce;
+              book.ISBN = res.msg.books[i].isbncode;
+              book.owner = res.msg.books[i].ownerid;
+              book.name = res.msg.books[i].name;
+              that.recommend.push(book);
+            }
+          } else {
+            alert(res.msg)
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+
       scanCode() {
         console.log('浏览器信息', navigator.userAgent);
         this.$router.push({
           path: '/scan'
         });
       },
+
       getBookDetails(book){
         let that = this;
         console.log(book.id)

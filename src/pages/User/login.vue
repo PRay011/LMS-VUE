@@ -6,13 +6,13 @@
            </div>
            <div class="right">
                 <div class="title">欢迎登录</div>
-                <el-input v-model="accout" placeholder="请输入账号" style="" />
+                <el-input v-model="account" placeholder="请输入账号" style="" />
                 <el-input v-model="password" placeholder="请输入密码" />
                 <div style="margin-top: 10px;"></div>
                 <el-text class="forget" type="primary">忘记密码？</el-text>
                 <div style="margin-top: 90px;"></div>
                 <el-button class="login" @click="login()">登录</el-button>
-                <el-button class="register" @click="register()">注册</el-button>
+                <el-button class="register" @click="toRegister()">注册</el-button>
            </div>
         </div>
     </div>
@@ -22,18 +22,52 @@
   import { defineComponent } from "vue"
   import '../../utils/login.js'
   import navigationBar from '../../components/header.vue'
+  import axios from "axios";
 
   export default defineComponent({
       name: "login",
       data(){
           return {
-              accout:'',
+              account:'',
               password:'',
           }
       },
       components: {navigationBar},
       methods: {
-        register(){
+        login(){
+            let that = this
+            if (that.account === null || that.password === null) {
+                alert("输入不能为空")
+            }
+            else {
+                let data = {
+                    userid: that.account,
+                    password: that.password,
+                };
+                let config = {
+                    method: 'post',
+                    url: 'http://localhost:5000/guest/session',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: data
+                };
+                axios(config)
+                .then(function (response) {
+                        let res = response.data
+                        if (res.code === 200) {
+                            sessionStorage.setItem("user", JSON.stringify('true'));
+                            that.$router.push('/')
+                        } else {
+                            alert(res.msg)
+                        }
+                    })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        },
+        toRegister(){
             this.$router.push('/register')
         }
       },

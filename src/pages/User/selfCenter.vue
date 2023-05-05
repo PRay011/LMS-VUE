@@ -507,8 +507,38 @@
          },
           methods: {
             ready(){
-                var that = this;
+                let that = this;
                 //借书记录表单
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/loginUser/list`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    //赋值给books
+                    that.borrowRecords = [];
+                    let book = {};
+                    for(let i = 0;i < res.msg.length;i++){
+                    book.id = res.msg[i].id;
+                    book.startDate = res.msg[i].date;
+                    book.endDate = res.msg[i].return_deadline;
+                    book.category = res.msg[i].type;
+                    book.bookName = res.msg[i].bookname;
+                    book.owner = res.msg[i].ownerid;
+                    book.tag = res.msg[i].status;
+                    that.borrowRecords.push(book);
+                    }
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 if(that.borrowRecords){
                     that.filterTable_Borrow = computed(() =>
                     that.borrowRecords.filter(
@@ -518,6 +548,7 @@
                 )
                 )
                 };
+
                 if(that.myBooks){
                     that.filterTable_Mine = computed(() =>
                     that.myBooks.filter(

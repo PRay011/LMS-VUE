@@ -111,6 +111,7 @@
                 this.codeReader.reset();
                 this.tipShow = false;
                 sessionStorage.setItem("search", JSON.stringify(that.scanText));
+                sessionStorage.setItem("way", JSON.stringify('scan'));
                 this.codeReader = null;
                 this.$router.push('/search');
                 

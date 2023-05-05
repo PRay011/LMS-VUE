@@ -32,7 +32,7 @@
             <el-button color="#626aef" :dark="isDark" plain style="margin-left: 29%;" @click="openChat()">在线交流</el-button>
             <div class="buttons">
                 <el-button type="primary" size="large" style="width:6%">在线阅读</el-button>
-                <el-button type="success" size="large" style="margin-left: 2%; width:6%">借书</el-button>
+                <el-button type="success" size="large" style="margin-left: 2%; width:6%" @click="borrow()">借书</el-button>
             </div>
         </div>
     </div>
@@ -61,6 +61,7 @@
             type="textarea"
             placeholder="请输入"
         />
+        <el-button type="primary" size="large" class="send" @click="addMessage()">添加消息记录</el-button>
         <el-button type="primary" size="large" class="send" @click="sendMessage()">发送</el-button>
         
     </div>
@@ -78,6 +79,7 @@
             return {
               direction:'ttb',
               chatStatus:false,
+              id:'',
               name:'',
               introduce:'',
               imgSrc:'',
@@ -117,11 +119,58 @@
                 that.imgSrc = book.src; 
                 that.ISBN = book.ISBN;
                 that.owner = book.owner;
+                that.id = book.id;
                 console.log('detail');
             },
-            openChat(){
-                this.chatStatus = true
+
+            borrow(){
+                let that = this;
+                let data={
+                    bookid: that.id,
+                    bookname: that.ma,e,
+                };
+                let config = {
+                    method: 'post',
+                    url: `http://localhost:5000//loginUser/list`,
+                    headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    data: data
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert(res.msg)
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
             },
+
+            openChat(){
+                let login = JSON.parse(sessionStorage.getItem("user"));
+                if(login){
+                    this.chatStatus = true;
+                    getMessage()
+                }
+                else{
+                    alert('请先登录');
+                    this.$router.push('/login')
+                }
+            },
+
+            getMessage(){
+
+            },
+
+            addMessage(){
+
+            },
+
             sendMessage(){
                 let that = this;
                 let message = that.message_new;
