@@ -6,12 +6,17 @@
            </div>
            <div class="right">
                 <div class="title">欢迎注册</div>
-                <el-input v-model="accout" placeholder="请输入账号" style="" />
+                <el-input v-model="account" placeholder="请输入账号" style="" />
                 <el-input v-model="password" placeholder="请输入密码" />
-                <el-input v-model="confirePassword" placeholder="请再次输入密码" />
+                <el-input v-model="confirmPassword" placeholder="请再次输入密码" />
+                <div style="margin-top: 15px;"></div>
+                <el-radio-group v-model="category" style="margin-left: 10%;">
+                    <el-radio :label="2" size="large">学生</el-radio>
+                    <el-radio :label="3" size="large">老师</el-radio>
+                </el-radio-group>
                 <div style="margin-top: 65px;"></div>
-                <el-button class="login">注册</el-button>
-                <el-button class="register" @click="login()">登录</el-button>
+                <el-button class="login" @click="register()">注册</el-button>
+                <el-button class="register" @click="toLogin()">登录</el-button>
            </div>
         </div>
     </div>  
@@ -26,14 +31,22 @@
         name: "register",
         data(){
             return {
-              accout:'',
+              account:'',
               password:'',
+              confirmPassword:'',
+              category:2,
             }
         },
         components: {navigationBar},
         methods: {
-            login(){
+            toLogin(){
                 this.$router.push('/login')
+            },
+            register(){
+                
+                sessionStorage.setItem("user", JSON.stringify('true'));
+                console.log(this.category)
+                this.$router.push('/')
             }
         },
     })

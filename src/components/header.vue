@@ -13,7 +13,8 @@
     <!-- <el-menu-item index="4" >信息</el-menu-item> -->
     <el-menu-item index="/selfCenter">个人中心</el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="/login">登录</el-menu-item>
+    <el-menu-item v-if="login" @click="logout()" >登出</el-menu-item>
+    <el-menu-item index="/login" v-else>登录</el-menu-item>
   </el-menu>
 
 </template>
@@ -25,8 +26,12 @@
       name: "header",
       data(){
           return {
-              data:''
+              data:'',
+              login:false,
           }
+      },
+      mounted:function(){
+          this.whetherLogin()
       },
       methods: {
         handleSelect(key, keyPath) {
@@ -34,7 +39,20 @@
           path: key,
           params: {data: 'query' }
         })
-      }
+        },
+        whetherLogin(){
+          if(JSON.parse(sessionStorage.getItem("user"))!=null){
+            this.login = JSON.parse(sessionStorage.getItem("user"));
+          }
+          else{
+            this.login=false
+          }
+          console.log(this.login)
+        },
+        logout(){
+          sessionStorage.setItem("user", JSON.stringify('false'));
+          this.login=false
+        }
       }
   })
 </script>
