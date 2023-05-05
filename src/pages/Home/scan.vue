@@ -111,12 +111,12 @@
               this.scanText = result.text;
               console.log(this.scanText)
               if (this.scanText) {
+                this.codeReader.reset();
                 this.tipShow = false;
-                console.log('ininininin')
                 sessionStorage.setItem("scanText", JSON.stringify(that.scanText));
-                that.$router.push('/detail')
                 this.codeReader = null;
-                this.$destroy();
+                this.$router.push('/search');
+                
                 // 这部分接下去的代码根据需要，读者自行编写了
                 // this.$store.commit('app/SET_SCANTEXT', result.text);
                 // console.log('已扫描的小票列表', this.$store.getters.scanTextArr);

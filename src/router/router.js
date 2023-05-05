@@ -48,6 +48,12 @@ const router = createRouter({
         name: 'scan', 
         component: () => 
             import('../pages/Home/scan.vue'),
+      },
+      { 
+        path: '/search', 
+        name: 'search', 
+        component: () => 
+            import('../pages/Library/search.vue'),
       }
     ],
 })

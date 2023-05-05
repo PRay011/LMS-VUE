@@ -26,6 +26,10 @@
                 </div>
                
             </div>
+            <div class="buttons">
+                <el-button type="primary" size="large" style="mwidth:6%">在线阅读</el-button>
+                <el-button type="success" size="large" style="margin-left: 2%; width:6%">借书</el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -60,7 +64,8 @@
                 that.imgSrc = book.src; 
                 that.ISBN = book.ISBN;
                 console.log('detail');
-            }
+            },
+            
         },
     })
 </script>

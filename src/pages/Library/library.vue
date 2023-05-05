@@ -9,7 +9,7 @@
             </div>
             <el-input v-model="searchContent" placeholder="请输入搜索内容">
                 <template #append>
-                    <el-button  >
+                    <el-button  @click="search()">
                         <el-icon>
                              <Search />
                         </el-icon>
@@ -26,85 +26,86 @@
                     class="el-menu-vertical-demo"
                     @open="handleOpen"
                     @close="handleClose"
+                    @select="menuSelect"
                 >
-                    <el-menu-item index="1">
+                    <el-menu-item index="文学">
                         <el-icon><Reading /></el-icon>
                         <span>文学</span>
                     </el-menu-item>
-                    <el-menu-item index="2">
+                    <el-menu-item index="经济">
                         <el-icon><Reading /></el-icon>
                         <span>经济</span>
                     </el-menu-item>
-                    <el-menu-item index="3">
+                    <el-menu-item index="历史、地理">
                         <el-icon><Reading /></el-icon>
                         <span>历史、地理</span>
                     </el-menu-item>
-                    <el-menu-item index="4">
+                    <el-menu-item index="工业技术">
                         <el-icon><Reading /></el-icon>
                         <span>工业技术</span>
                     </el-menu-item>
-                    <el-menu-item index="5">
+                    <el-menu-item index="艺术">
                         <el-icon><Reading /></el-icon>
                         <span>艺术</span>
                     </el-menu-item>
-                    <el-menu-item index="6">
+                    <el-menu-item index="哲学、宗教">
                         <el-icon><Reading /></el-icon>
                         <span>哲学、宗教</span>
                     </el-menu-item>
-                    <el-menu-item index="7">
+                    <el-menu-item index="文化、科学、教育、体育">
                         <el-icon><Reading /></el-icon>
                         <span>文化、科学、教育、体育</span>
                     </el-menu-item>
-                    <el-menu-item index="8">
+                    <el-menu-item index="政治、法律">
                         <el-icon><Reading /></el-icon>
                         <span>政治、法律</span>
                     </el-menu-item>
-                    <el-menu-item index="9">
+                    <el-menu-item index="语言、文字">
                         <el-icon><Reading /></el-icon>
                         <span>语言、文字</span>
                     </el-menu-item>
-                    <el-menu-item index="10">
+                    <el-menu-item index="社会科学总论">
                         <el-icon><Reading /></el-icon>
                         <span>社会科学总论</span>
                     </el-menu-item>
-                    <el-menu-item index="11">
+                    <el-menu-item index="医药、卫生">
                         <el-icon><Reading /></el-icon>
                         <span>医药、卫生</span>
                     </el-menu-item>
-                    <el-menu-item index="12">
+                    <el-menu-item index="数理科学和化学">
                         <el-icon><Reading /></el-icon>
                         <span>数理科学和化学</span>
                     </el-menu-item>
-                    <el-menu-item index="13">
+                    <el-menu-item index="生物科学">
                         <el-icon><Reading /></el-icon>
                         <span>生物科学</span>
                     </el-menu-item>
-                    <el-menu-item index="14">
+                    <el-menu-item index="军事">
                         <el-icon><Reading /></el-icon>
                         <span>军事</span>
                     </el-menu-item>
-                    <el-menu-item index="15">
+                    <el-menu-item index="天文学、地球科学">
                         <el-icon><Reading /></el-icon>
                         <span>天文学、地球科学</span>
                     </el-menu-item>
-                    <el-menu-item index="16">
+                    <el-menu-item index="环境科学、安全科学">
                         <el-icon><Reading /></el-icon>
                         <span>环境科学、安全科学</span>
                     </el-menu-item>
-                    <el-menu-item index="17" style="height:60px; line-height: 20px; ">
+                    <el-menu-item index="马克思主义、列宁主义、毛泽东思想、邓小平理论" style="height:60px; line-height: 20px; ">
                         <el-icon><Reading /></el-icon>
                         <span>马克思主义、列宁主义、<br>
                             毛泽东思想、邓小平理论</span>
                     </el-menu-item>
-                    <el-menu-item index="18">
+                    <el-menu-item index="交通运输">
                         <el-icon><Reading /></el-icon>
                         <span>交通运输</span>
                     </el-menu-item>
-                    <el-menu-item index="19">
+                    <el-menu-item index="自然科学总论">
                         <el-icon><Reading /></el-icon>
                         <span>自然科学总论</span>
                     </el-menu-item>
-                    <el-menu-item index="20">
+                    <el-menu-item index="农业科学">
                         <el-icon><Reading /></el-icon>
                         <span>农业科学</span>
                     </el-menu-item>
@@ -137,6 +138,7 @@
           return {
               searchContent:'',
               bookNumber:9,
+              bookType:'',
               books:[
                 {
                     id: 1,
@@ -214,7 +216,20 @@
             console.log(book.id)
             sessionStorage.setItem("book", JSON.stringify(book));
             that.$router.push('/detail')
-          }
+        },
+
+        search(){
+            console.log("search")
+            let bookName = this.searchContent;
+            sessionStorage.setItem("search", JSON.stringify(bookName));
+            this.$router.push('/search')
+        },
+
+        menuSelect(index){
+            let that = this; 
+            that.bookType = index;
+            console.log("当前选中的菜单项索引是：" + encodeURIComponent(index));
+        }
       },
   })
 </script>
