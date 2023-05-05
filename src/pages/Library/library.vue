@@ -114,7 +114,8 @@
             </div>
             <div class="books">
                 <div class="book" v-for="book in books" :key="book.id" @click="getBookDetails(book)">
-                    <img :src="book.src" class="book-image"  onerror="this.src='/1.jpg';this.οnerrοr=null;" /><br>
+<!--                      onerror="this.src='/1.jpg';this.οnerrοr=null;" -->
+                    <img :src="book.src" class="book-image"/><br>
                     <div class="book-name">
                         <el-text class="book-name">{{ book.name }}</el-text>
                     </div>
@@ -146,7 +147,7 @@
                 {
                     id: 1,
                     name: '太阳和蜉蝣',
-                    src: "../../assets/image/slideshow/1.jpg",
+                    src: "./src/assets/image/slideshow/2.jpg",
                     ISBN:'9787559725554',
                     introduce: '这是第一本书',
                     owner: '小王'
