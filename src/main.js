@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 
 import App from './App.vue'
 import router from '../src/router/router.js'
@@ -12,6 +12,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 app.use(VueAxios, axios);
+axios.defaults.withCredentials = true  //跨域请求带上cookie
 app.use(router)
 app.mount('#app')
 

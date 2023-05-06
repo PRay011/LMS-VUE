@@ -948,10 +948,9 @@
                 let that = this;
                 let requireId = row.user;
                 let bookId = row.id;
-                let status = row.tag;
                 let config = {
                     method: 'get',
-                    url: `http://localhost:5000/loginUser/books/checkRequire/${requireId}/${bookId}/${2}`,
+                    url: `http://localhost:5000/loginUser/books/checkRequire/${requireId}/${bookId}/${-1}`,
                     headers: {
                     },
                 };
@@ -959,17 +958,10 @@
                 .then(function (response) {
                 let res = response.data
                 if (res.code === 200) {
-                      //赋值给books
-                    that.inBox = [];
-                    for(let i = 0;i < res.msg.length;i++){
-                        let book = {};
-                        book.id = res.msg[i].id;
-                        book.bookName = res.msg[i].name;
-                        book.user = res.msg[i].lenderid;
-                        book.tag = res.msg[i].status;
-                        that.inBox.push(book);
-                    }
-                } else {
+                    alert('拒绝借出');
+                    getInBox()
+                } 
+                else {
                     alert(res.msg)
                 }
                 })
@@ -978,14 +970,14 @@
                 });
                 console.log(index, row)
             },
+            //同意借出
             bookAgree ( index, row) {
                 let that = this;
                 let requireId = row.user;
                 let bookId = row.id;
-                let status = row.tag;
                 let config = {
                     method: 'put',
-                    url: `http://localhost:5000/loginUser/books/checkRequire/${requireId}/${bookId}/${status}`,
+                    url: `http://localhost:5000/loginUser/books/checkRequire/${requireId}/${bookId}/${1}`,
                     headers: {
                     },
                 };
@@ -994,7 +986,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('借出成功');
-                    getMyBooks()
+                    getInBox()
                 } else {
                     alert(res.msg)
                 }
@@ -1006,7 +998,7 @@
             },
             //这是申请表
             getOutBox(){
-
+                
             },
 
             chat ( index, row) {
