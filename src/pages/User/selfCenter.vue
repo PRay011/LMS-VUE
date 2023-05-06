@@ -1053,7 +1053,7 @@
                         that.inBox = [];
                         for (let i = 0; i < res.msg.length; i++) {
                             let book = {};
-                            book.id = res.msg[i].id;
+                            book.id = res.msg[i].bookid;
                             book.bookName = res.msg[i].name;
                             book.user = res.msg[i].lenderid;
                             book.tag = res.msg[i].status;
