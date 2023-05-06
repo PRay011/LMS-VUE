@@ -209,6 +209,7 @@
                 }
                 else{
                     let data={
+                        ownerid: that.owner,
                         bookid: that.id,
                         bookname: that.name,
                     };

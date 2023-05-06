@@ -66,7 +66,7 @@ export default defineComponent({
                 .then(function (response) {
                         let res = response.data
                         if (res.code === 200) {
-                            sessionStorage.setItem("user", JSON.stringify('true'));
+                            sessionStorage.setItem("user", JSON.stringify(res.userType));
                             console.log(this.category)
                             that.$router.push('/')
                         } else {

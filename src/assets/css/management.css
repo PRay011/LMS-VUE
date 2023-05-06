@@ -1,0 +1,8 @@
+.pages{
+    height: 845px;
+    width: 1900px;
+    margin-top: 10px;
+    background-color: rgb(239,239,239);
+    font-size: 17px;
+    overflow: hidden;
+}
