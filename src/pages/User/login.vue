@@ -56,7 +56,8 @@
                 .then(function (response) {
                         let res = response.data
                         if (res.code === 200) {
-                            sessionStorage.setItem("user", JSON.stringify('true'));
+                            console.log(res.userType)
+                            sessionStorage.setItem("user", JSON.stringify(res.userType));
                             that.$router.push('/')
                         } else {
                             alert(res.msg)

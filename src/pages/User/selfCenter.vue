@@ -169,7 +169,7 @@
                     </el-tab-pane>
                 </el-tabs> 
             </el-tab-pane>
-        </el-tabs>
+            </el-tabs>
         </div>
     </div>
     <!-- 修改书籍数据 -->
@@ -252,7 +252,7 @@
     <el-drawer
     ref="drawerRef"
     v-model="top_drawer"
-    title="I have a nested form inside!"
+    title="修改密码"
     :before-close="handleClose"
     direction="ttb"
     class="demo-drawer"
@@ -260,10 +260,10 @@
     <div class="demo-drawer__content">
       <el-form :model="passwords">
         <el-form-item label="旧密码" :label-width="formLabelWidth">
-          <el-input v-model="passwords.password_old" autocomplete="off" />
+          <el-input v-model="passwords.password_old" type="password" autocomplete="off" />
         </el-form-item>
         <el-form-item label="新密码" :label-width="formLabelWidth">
-          <el-input v-model="passwords.password_new" autocomplete="off" />
+          <el-input v-model="passwords.password_new" type="password" autocomplete="off" />
         </el-form-item>
       </el-form>
       <div class="demo-drawer__footer" >
@@ -279,7 +279,7 @@
       import {computed, defineComponent } from "vue"
       import '../../utils/selfCenter.js'
       import navigationBar from '../../components/header.vue'
-      import axios from "axios";
+      import axios from "axios"
 
       export default defineComponent({
           name: "selfCenter",
@@ -593,7 +593,8 @@
             ready(){
                 let that = this;
                 let login = JSON.parse(sessionStorage.getItem("user"));
-                if(login){
+                console.log(login)
+                if(login!=0||login!=1||login!=2||login!=3){
                       //个人信息
                     let config = {
                         method: 'get',
@@ -672,7 +673,30 @@
             },
 
             comfirmPassword(){
-
+                let that = this;
+                if(that.passwords.password_new===''||that.passwords.password_old===''){
+                    alert('输入不能为空');
+                }
+                else{
+                    let config = {
+                    method: 'put',
+                    url: `http://localhost:5000/loginUser/password`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                   alert('修改成功')
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                }
             },
 
             //借书记录

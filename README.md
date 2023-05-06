@@ -13,7 +13,8 @@ index.vue ：6行
 library.css : 3、4行
 selfCenter.css : 2、3、82行
 selfCenter.vue: 21、53行....(还有几个类似的自己看着办吧qwq)
-detail.vue:39行
+detail.vue:39行,
+userManagement.css: 2、3行
 
 ## Recommended IDE Setup
 

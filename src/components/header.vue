@@ -1,5 +1,4 @@
 <template>
-
 <el-menu
 :default-active="activeIndex"
     class="el-menu-demo"
@@ -12,11 +11,12 @@
     <!-- <el-menu-item index="3" disabled>信息</el-menu-item> -->
     <!-- <el-menu-item index="4" >信息</el-menu-item> -->
     <el-menu-item index="/selfCenter">个人中心</el-menu-item>
+    <el-menu-item index="/userManagement" v-if="type==1">用户管理</el-menu-item>
+    <el-menu-item index="/managerManagement" v-if="type==0">管理员管理</el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item v-if="login" @click="logout()" >登出</el-menu-item>
+    <el-menu-item v-if="login" @click="logout()">登出</el-menu-item>
     <el-menu-item index="/login" v-else>登录</el-menu-item>
   </el-menu>
-
 </template>
 
 <script>
@@ -28,7 +28,8 @@
       data(){
           return {
               data:'',
-              login:false,
+              login: false,
+              type: 2,
           }
       },
       mounted:function(){
@@ -43,14 +44,16 @@
         },
         whetherLogin(){
           if(JSON.parse(sessionStorage.getItem("user"))!=null){
-            this.login = JSON.parse(sessionStorage.getItem("user"));
+            this.type = JSON.parse(sessionStorage.getItem("user"));
+            this.login = true
           }
           else{
-            this.login=false
+            this.login= false;
+            this.type = 2;
           }
-          console.log(this.login)
         },
         logout(){
+          let that = this;
           let config = {
             method: 'delete',
             url: `http://localhost:5000/loginUser/session`,
@@ -62,8 +65,9 @@
                 let res = response.data
                 if (res.code === 200) {
                   alert('退出登陆成功');
-                  sessionStorage.setItem("user", JSON.stringify('false'));
-                  this.login=false
+                  sessionStorage.setItem("user", JSON.stringify(null));
+                  that.login=false;
+                  that.$router.push('/')
                 } else {
                     alert(res.msg)
                 }

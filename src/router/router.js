@@ -54,6 +54,18 @@ const router = createRouter({
         name: 'search', 
         component: () => 
             import('../pages/Library/search.vue'),
+      },
+      { 
+        path: '/userManagement', 
+        name: 'userManagement', 
+        component: () => 
+            import('../pages/Manage/userManagement.vue'),
+      },
+      { 
+        path: '/managerManagement', 
+        name: 'managerManagement', 
+        component: () => 
+            import('../pages/Manage/managerManagement.vue'),
       }
     ],
 })
