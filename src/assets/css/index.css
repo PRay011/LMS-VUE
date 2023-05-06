@@ -1,144 +1,144 @@
-.container{
-     /* 自己设置一下适宜的宽度和高度 */
-     height: 750px;
-     width: 1890px;
-     overflow: hidden;
+.container {
+    /* 自己设置一下适宜的宽度和高度 */
+    height: 750px;
+    width: 1890px;
+    overflow: hidden;
 }
 
-.container .info-container{
+.container .info-container {
     position: relative;
     /* top:8.5px; */
     margin-top: -37.2%;
     /* left:9px; */
-    height:93%;
-    width:100%;
-    background-color: rgba(0,0,0,0.3);
+    height: 93%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
 
-.container .info-container .info{
+.container .info-container .info {
     /* position: absolute; */
-    margin-top:13%;
+    margin-top: 13%;
     margin-left: 26.3%;
-    color:white;
-    font-size:30px
+    color: white;
+    font-size: 30px
 }
 
-.container .info-container .introduction{
+.container .info-container .introduction {
     /* position: absolute; */
-    margin-top:2%;
+    margin-top: 2%;
     margin-left: 18%;
-    color:white;
-    font-size:20px
+    color: white;
+    font-size: 20px
 }
 
-.container .info-container .introduction2{
+.container .info-container .introduction2 {
     /* position: absolute; */
     margin-left: 12%;
     margin-top: 30px;
-    
-    color:white;
-    font-size:20px
+
+    color: white;
+    font-size: 20px
 }
 
-.container .info-container .scan{
+.container .info-container .scan {
     /* position: absolute; */
-    width:8%;
-    height:21%;
-    margin-top:1%;
+    width: 8%;
+    height: 21%;
+    margin-top: 1%;
     margin-left: 46.5%;
-    border:1px solid transparent;
+    border: 1px solid transparent;
     border-radius: 100%;
     font-family: Arial;
     font-size: 40px;
-    color:rgb(2,70,143);
-    background-color: rgba(255,255,255,0.8);
+    color: rgb(2, 70, 143);
+    background-color: rgba(255, 255, 255, 0.8);
     transition-duration: 0.5s;
     /* border:1px solid white; */
 }
 
-.container .info-container .scan:hover{
-    color:white;
-    background-color: rgba(2,70,143,0.8);
+.container .info-container .scan:hover {
+    color: white;
+    background-color: rgba(2, 70, 143, 0.8);
 }
 
-.info-addition{
+.info-addition {
     height: 700px;
     width: 1890px;
-    margin-top:30px;
+    margin-top: 30px;
 }
 
-.info-addition .head{
+.info-addition .head {
     margin-left: 41%;
     font-size: 30px;
 }
 
-.info-addition .content{
-    margin-left: 32%;
-    margin-top:20px;
+.info-addition .content {
+    margin-left: 25%;
+    margin-top: 20px;
     font-size: 20px;
 }
 
-.info-addition .recommend{
+.info-addition .recommend {
     height: 65%;
     width: 100%;
-    margin-top:5%;
+    margin-top: 5%;
 }
 
-.info-addition .recommend .recommend-title{
+.info-addition .recommend .recommend-title {
     height: 10%;
     width: 100%;
-    margin-top:1%;
+    margin-top: 1%;
     font-size: 30px;
     text-align: left;
 }
 
-.info-addition .recommend .recommend-content{
+.info-addition .recommend .recommend-content {
     height: 95%;
     width: 100%;
-    margin-top:3%;
+    margin-top: 3%;
 }
 
-.info-addition .recommend .recommend-content .book{
+.info-addition .recommend .recommend-content .book {
     float: left;
-    height:77%;
-    width:13%;
+    height: 77%;
+    width: 13%;
     margin-left: 3%;
-    margin-top:0%;
-    color:white;
+    margin-top: 0%;
+    color: white;
     font-size: 30px;
     background-color: white;
-    box-shadow:  5px 5px 10px #cecece,
-             -5px -5px 10px #f2f2f2;
+    box-shadow: 5px 5px 10px #cecece,
+    -5px -5px 10px #f2f2f2;
     overflow: hidden;
 }
 
-.info-addition .recommend .recommend-content .book .book-image{
-    height:75%;
-    width:80%;
+.info-addition .recommend .recommend-content .book .book-image {
+    height: 55%;
+    width: 80%;
     margin-left: 10%;
-    margin-top:8%;
-    color:white;
+    margin-top: 8%;
+    color: white;
 
 }
 
-.info-addition .recommend .recommend-content .book .book-name{
+.info-addition .recommend .recommend-content .book .book-name {
     height: 3%;
     width: 100%;
     margin: auto;
-    margin-top:2%;
+    margin-top: 2%;
     font-size: 20px;
     font-weight: 600;
-    color:black;
-    text-align: center;  
+    color: black;
+    text-align: center;
 }
 
-.info-addition .recommend .recommend-content .book .book-owner{
+.info-addition .recommend .recommend-content .book .book-owner {
     height: 5%;
     width: 100%;
     margin: auto;
-    margin-top:6%;
+    margin-top: 6%;
     font-size: 15px;
-    color:black;
-    text-align: center;  
+    color: black;
+    text-align: center;
 }

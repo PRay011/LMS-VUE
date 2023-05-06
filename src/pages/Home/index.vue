@@ -27,7 +27,8 @@
     <div class="info-addition">
         <el-text class="head" size="large">什么是图书管理系统？</el-text>
         <div style="margin-top: 20px;"></div>
-        <el-text class="content">我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊我不到啊</el-text>
+        <el-text class="content">图书管理系统，是一个由人、计算机等组成的能进行管理信息的收集、传递、加工、保存、维护和使用的系统。
+        </el-text>
         <div class="recommend">
             <div class="recommend-title">
                 <el-text style="font-size:30px;margin-left: 2%;">推荐书目</el-text>
@@ -165,7 +166,7 @@ export default defineComponent({
                         that.recommend = [];
                         for (let i = 0; i < res.msg.length; i++) {
                             let book = {};
-                            book.image = res.msg[i].image;
+                            book.src = `http://localhost:5000${res.msg[i].image}`;
                             book.introduce = res.msg[i].introduce;
                             book.ISBN = res.msg[i].isbncode;
                             book.owner = res.msg[i].ownerid;
