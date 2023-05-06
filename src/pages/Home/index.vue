@@ -180,7 +180,6 @@ export default defineComponent({
                     console.log(error);
                 });
         },
-
         scanCode() {
             console.log('浏览器信息', navigator.userAgent);
             this.$router.push({
