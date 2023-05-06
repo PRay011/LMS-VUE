@@ -61,7 +61,6 @@
             type="textarea"
             placeholder="请输入"
         />
-        <el-button type="primary" size="large" class="send" @click="addMessage()">添加消息记录</el-button>
         <el-button type="primary" size="large" class="send" @click="sendMessage()">发送</el-button>
         
     </div>
@@ -102,19 +101,74 @@
                 receiverid:"小王",
                 speakerid:"pr"
               },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"pr",
+                speakerid:"小王"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"小王",
+                speakerid:"pr"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"pr",
+                speakerid:"小王"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"小王",
+                speakerid:"pr"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"pr",
+                speakerid:"小王"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"小王",
+                speakerid:"pr"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"pr",
+                speakerid:"小王"
+              },
+              {
+                date:"2023-05-04 23:18:16",
+                id:2,
+                message:"hello",
+                receiverid:"小王",
+                speakerid:"pr"
+              },
               ]
             }
         },
         components: {navigationBar},
         mounted:function(){
             this.whichBook()
+            this.getMessage()
         },
         methods: {
             whichBook(){
                 let that = this;
                 let book = JSON.parse(sessionStorage.getItem("book"));
-                let target = JSON.parse(sessionStorage.getItem("scanText"));
-                console.log(target)
                 that.name = book.name;
                 that.introduce = book.introduce;
                 that.imgSrc = book.src; 
@@ -126,37 +180,67 @@
 
             borrow(){
                 let that = this;
-                let data={
-                    bookid: that.id,
-                    bookname: that.ma,e,
-                };
-                let config = {
-                    method: 'post',
-                    url: `http://localhost:5000//loginUser/list`,
-                    headers: {
-                            'Content-Type': 'application/json'
-                        },
-                    data: data
-                };
-                axios(config)
-                .then(function (response) {
-                let res = response.data
-                if (res.code === 200) {
-                    alert(res.msg)
-                } else {
-                    alert(res.msg)
+                let name = that.owner;
+                if(name === 'sadmin'){
+                    let data={
+                        bookid: that.id,
+                        bookname: that.name,
+                    };
+                    let config = {
+                        method: 'post',
+                        url: `http://localhost:5000/loginUser/list`,
+                        headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        data: data
+                    };
+                    axios(config)
+                    .then(function (response) {
+                    let res = response.data
+                    if (res.code === 200) {
+                        alert('借书成功')
+                    } else {
+                        alert(res.msg)
+                    }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
                 }
-                })
-                .catch(function (error) {
-                console.log(error);
-                });
+                else{
+                    let data={
+                        bookid: that.id,
+                        bookname: that.name,
+                    };
+                    let config = {
+                        method: 'post',
+                        url: `http://localhost:5000/loginUser/books/sendRequire`,
+                        headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        data: data
+                    };
+                    axios(config)
+                    .then(function (response) {
+                    let res = response.data
+                    if (res.code === 200) {
+                        alert('借书成功')
+                    } else {
+                        alert(res.msg)
+                    }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
+               
             },
 
             openChat(){
                 let login = JSON.parse(sessionStorage.getItem("user"));
                 if(login){
                     this.chatStatus = true;
-                    getMessage()
+                    this.getMessage()
                 }
                 else{
                     alert('请先登录');
@@ -165,17 +249,67 @@
             },
 
             getMessage(){
-
-            },
-
-            addMessage(){
-
+                let that = this;
+                let chatPerson = that.owner;
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/loginUser/chat/${chatPerson}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                      //赋值给books
+                    that.chatRecords = [];
+                    for(let i = res.msg.length-1;i >= 0;i--){
+                        let chat = {};
+                        chat.id = res.msg[i].id;
+                        chat.date = res.msg[i].date;
+                        chat.message = res.msg[i].msg;
+                        chat.receiverid = res.msg[i].receiverid;
+                        chat.speakerid = res.msg[i].speakerid; 
+                        that.chatRecords.push(chat);
+                    }
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
 
             sendMessage(){
                 let that = this;
                 let message = that.message_new;
-                console.log(message);
+                let receiverid = that.owner;
+                let data = {
+                    receiverid: receiverid,
+                    msg: message
+                }
+                let config = {
+                    method: 'post',
+                    url: `http://localhost:5000/loginUser/chat`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:data
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    that.message_new='';
+                    that.getMessage()
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             }
         },
     })

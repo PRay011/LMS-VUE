@@ -7,7 +7,7 @@
            <div class="right">
                 <div class="title">欢迎登录</div>
                 <el-input v-model="account" placeholder="请输入账号" style="" />
-                <el-input v-model="password" placeholder="请输入密码" />
+                <el-input v-model="password" type="password" placeholder="请输入密码" />
                 <div style="margin-top: 10px;"></div>
                 <el-text class="forget" type="primary">忘记密码？</el-text>
                 <div style="margin-top: 90px;"></div>

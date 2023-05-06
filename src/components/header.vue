@@ -21,6 +21,7 @@
 
 <script>
  import { defineComponent } from "vue"
+ import axios from "axios";
 
   export default defineComponent({
       name: "header",
@@ -50,8 +51,27 @@
           console.log(this.login)
         },
         logout(){
-          sessionStorage.setItem("user", JSON.stringify('false'));
-          this.login=false
+          let config = {
+            method: 'delete',
+            url: `http://localhost:5000/loginUser/session`,
+            headers: {
+            },
+            };
+            axios(config)
+            .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                  alert('退出登陆成功');
+                  sessionStorage.setItem("user", JSON.stringify('false'));
+                  this.login=false
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+          
         }
       }
   })

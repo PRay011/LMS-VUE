@@ -223,7 +223,7 @@
       },
       components: {navigationBar},
       mounted:function(){
-        // this.ready();
+        this.ready();
       },
       methods: {
         ready(){
@@ -280,12 +280,12 @@
         //获取页数
         handleSizeChange(val){
             this.pageNumber=val;
-            ready();
+            this.ready();
         },
 
         menuSelect(index){
             this.bookType = index;
-            ready();
+            this.ready();
         },
             
         },

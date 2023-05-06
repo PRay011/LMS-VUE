@@ -224,7 +224,7 @@
         //获取页数
         handleSizeChange(val){
             this.pageNumber=val;
-            ready();
+            this.ready();
         },
       },
   })

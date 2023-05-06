@@ -16,6 +16,7 @@
             input-style="color:white"
             @blur="changeIntroduce()"
             /></div>
+            <el-button type="primary" size="large" style="margin-left: 92%;margin-top: -2%;  background-color: rgba(64,158,255,0.6);" @click="changePassword()">修改密码</el-button>
         </div>
         <div class="bottom">
             <el-tabs type="border-card" class="pages">
@@ -139,8 +140,8 @@
                     </el-tab-pane>
                     <el-tab-pane label="申请表">
                         <el-table :data="filterTable_outBox" style="width: 100%" height="500">
-                            <el-table-column label="拥有者" prop="user" />
-                            <el-table-column label="书名" prop="bookName" />
+                            <el-table-column label="拥有者" prop="owner" />
+                            <el-table-column label="书名" prop="name" />
                             <el-table-column
                             prop="tag"
                             label="Tag"
@@ -171,6 +172,7 @@
         </el-tabs>
         </div>
     </div>
+    <!-- 修改书籍数据 -->
     <el-drawer
     ref="drawerRef"
     v-model="left_drawer"
@@ -183,7 +185,7 @@
       <el-form :model="editForm">
         <el-form-item label=""  :label-width="formLabelWidth">  
             <!-- <el-input v-model="editForm.image" height="300" name="image" type="file"/> -->
-            <img :src="editForm.image" width="200" height="300" class="head_pic"/>  
+            <img :src="editForm.image" width="200" height="300" class="head_pic" onerror="this.src='/1.jpg';this.οnerrοr=null;"/>  
             <el-button type="primary" style="margin-top: 59%;margin-left: 10%;" @click="uploadChange()">选择图片</el-button>
         </el-form-item>
         <el-form-item label="书名" :label-width="formLabelWidth">
@@ -207,6 +209,8 @@
       </div>
     </div>
     </el-drawer>
+
+    <!-- 添加书籍数据 -->
     <el-drawer
     ref="drawerRef"
     v-model="right_drawer"
@@ -219,7 +223,7 @@
       <el-form :model="addForm">
         <el-form-item label=""  :label-width="formLabelWidth">  
             <!-- <el-input v-model="editForm.image" height="300" name="image" type="file"/> -->
-            <img :src="addForm.image" width="200" height="300" class="head_pic"/>  
+            <img :src="addForm.image" width="200" height="300" class="head_pic" onerror="this.src='/1.jpg';this.οnerrοr=null;"/>  
             <el-button type="primary" style="margin-top: 59%;margin-left: 10%;" @click="uploadAdd()">选择图片</el-button>
         </el-form-item>
         <el-form-item label="书名" :label-width="formLabelWidth">
@@ -243,6 +247,33 @@
       </div>
     </div>
     </el-drawer>
+
+    <!-- 修改密码 -->
+    <el-drawer
+    ref="drawerRef"
+    v-model="top_drawer"
+    title="I have a nested form inside!"
+    :before-close="handleClose"
+    direction="ttb"
+    class="demo-drawer"
+  >
+    <div class="demo-drawer__content">
+      <el-form :model="passwords">
+        <el-form-item label="旧密码" :label-width="formLabelWidth">
+          <el-input v-model="passwords.password_old" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="新密码" :label-width="formLabelWidth">
+          <el-input v-model="passwords.password_new" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <div class="demo-drawer__footer" >
+        <el-button @click="cancelPassword" size="large">取消</el-button>
+        <el-button type="primary" :loading="loading" size="large" @click="comfirmPassword">{{
+          loading ? 'Submitting ...' : '确认'
+        }}</el-button>
+      </div>
+    </div>
+    </el-drawer>
 </template>
 <script>
       import {computed, defineComponent } from "vue"
@@ -261,6 +292,7 @@
                     tabPosition : 'left',
                     left_drawer:false,
                     right_drawer:false,
+                    top_drawer:false,
                     formLabelWidth:'80px',
                     editForm:{
                             id: '',
@@ -276,6 +308,10 @@
                             category: '',
                             introduce: '',
                             image: '',
+                    },
+                    passwords:{
+                        password_old:'',
+                        password_new:'',
                     },
                     borrowRecords: [
                         {
@@ -488,33 +524,57 @@
                         ],
                     outBox: [
                         {
-                            user: '2023120503',
-                            bookName: '人工智障',
+                            id:1,
+                            ISBN:'12131231342',
+                            introduce: '介绍',
+                            src:'/1.jpg',
+                            owner: '2023120503',
+                            name: '人工智障',
                             tag: 0,
                         },
                         {
-                            user: '20231206756',
-                            bookName: '从小学习C++',
+                            id:2,
+                            ISBN:'1213453451342',
+                            introduce: '介绍',
+                            src:'/4.jpg',
+                            owner: '20231206756',
+                            name: '从小学习C++',
                             tag: 1,
                         },
                         {
-                            user: '1243124124',
-                            bookName: '浪漫地球',
+                            id:3,
+                            ISBN:'18766531342',
+                            introduce: '介绍',
+                            src:'/1.jpg',
+                            owner: '1243124124',
+                            name: '浪漫地球',
                             tag: -1,
                         },
                         {
-                            user: '2023112312',
-                            bookName: '憨豆先生',
+                            id:4,
+                            ISBN:'976768542',
+                            introduce: '介绍',
+                            src:'/1.jpg',
+                            owner: '2023112312',
+                            name: '憨豆先生',
                             tag: 0,
                         },
                         {
-                            user: '2023345353',
-                            bookName: '浪漫地球',
+                            id:5,
+                            ISBN:'54567843467',
+                            introduce: '介绍',
+                            src:'/4.jpg',
+                            owner: '2023345353',
+                            name: '浪漫地球',
                             tag: -1,
                         },
                         {
-                            user: '2027389246',
-                            bookName: '憨豆先生',
+                            id:6,
+                            ISBN:'45889643576',
+                            introduce: '介绍',
+                            src:'/1.jpg',
+                            owner: '2027389246',
+                            name: '憨豆先生',
                             tag: 0,
                         },
                         ],
@@ -528,20 +588,11 @@
           components: {navigationBar},
           mounted:function(){
             this.ready();
-            //借书记录表单
-            this.getBorrowBooks();
-            //我的书籍
-            this.getMyBooks();
-            //信箱-收件箱
-            this.getInBox();
-            //信箱-申请表
-            this.getOutBox();
          },
           methods: {
             ready(){
                 let that = this;
                 let login = JSON.parse(sessionStorage.getItem("user"));
-                login = true;
                 if(login){
                       //个人信息
                     let config = {
@@ -565,26 +616,14 @@
                         console.log(error);
                     });
                     
-                    
-                    //
-                    if(that.inBox){
-                        that.filterTable_inBox = computed(() =>
-                        that.inBox.filter(
-                        (data) =>
-                        !that.search.value ||
-                        data.name.toLowerCase().includes(that.search.value.toLowerCase())
-                    )
-                    )
-                    };
-                    if(that.outBox){
-                        that.filterTable_outBox = computed(() =>
-                        that.outBox.filter(
-                        (data) =>
-                        !that.search.value ||
-                        data.name.toLowerCase().includes(that.search.value.toLowerCase())
-                    )
-                    )
-                    }
+                    //借书记录表单
+                    this.getBorrowBooks();
+                    //我的书籍
+                    this.getMyBooks();
+                    //信箱-收件箱
+                    this.getInBox();
+                    //信箱-申请表
+                    this.getOutBox();
                 }
                 else{
                     alert('请先登录');
@@ -596,6 +635,10 @@
             },
 
             //修改个人信息
+            changePassword(){
+                this.top_drawer=true;
+            },
+
             changeIntroduce(){
                 let that = this;
                 let data={
@@ -622,6 +665,14 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+
+            cancelPassword(){
+                this.top_drawer=false;
+            },
+
+            comfirmPassword(){
+
             },
 
             //借书记录
@@ -668,6 +719,7 @@
                 };
             },
 
+            //延期
             postpone ( index, row) {
                 console.log('延期');
                 let bookID = row.id;
@@ -682,7 +734,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('成功延期一个月');
-                    borrowBooks()
+                    that.borrowBooks()
                 } else {
                     alert(res.msg)
                 }
@@ -750,7 +802,11 @@
 
             comfirmEdit(){
                 let that = this;
-                let data={
+                if(that.editForm.bookName ==''||that.editForm.ISBN ==''||that.editForm.category ==''||that.editForm.introduce ==''||that.editForm.image ==''){
+                    alert('内容不能为空')
+                }
+                else{
+                    let data={
                     bookId: that.editForm.id,
                     name: that.editForm.bookName,
                     isbncode: that.editForm.ISBN,
@@ -771,7 +827,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('修改成功');
-                    getMyBooks()
+                    that.getMyBooks()
                 } else {
                     alert(res.msg)
                 }
@@ -780,6 +836,7 @@
                     console.log(error);
                 });
                 this.left_drawer = false
+                }
             },
 
             cancelEdit(){
@@ -811,6 +868,11 @@
 
             comfirmAdd(){
                 let that = this;
+                console.log('asdd')
+                if(that.addForm.bookName ==''||that.addForm.ISBN ==''||that.addForm.category ==''||that.addForm.introduce ==''||that.addForm.image ==''){
+                    alert('内容不能为空')
+                }
+                else{
                 let data={
                     name: that.addForm.bookName,
                     isbncode: that.addForm.ISBN,
@@ -831,7 +893,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('添加成功');
-                    getMyBooks();
+                    that.getMyBooks();
                 } else {
                     alert(res.msg)
                 }
@@ -840,6 +902,8 @@
                     console.log(error);
                 });
                 this.right_drawer = false
+                }
+                
             },
 
             cancelAdd(){
@@ -848,19 +912,20 @@
              //图片保存至本地也还没写
             uploadAdd(){
                 let that = this;
-                let input = document.createElement("input");
-                input.setAttribute("type", "file");
-                // 支持多选
-                input.accept = "image/*";
-                input.addEventListener("change", (e) => {
+                let input2 = document.createElement("input");
+                input2.setAttribute("type", "file");
+                input2.accept = "image/*";
+                input2.addEventListener("change", (e) => {
+                    console.log(e.files)
                     let file = e.path[0].files[0];
                     // 浏览器兼容性处理（有的浏览器仅存在 Window.URL）
                     const windowURL = window.URL || window.webkitURL;
                     // createObjectURL 函数会根据传入的参数创建一个指向该参数对象的URL
                     let filePath = windowURL.createObjectURL(file);
                     that.addForm.image = filePath;
+                    
                 });
-                input.click();
+                input2.click();
             },
 
             //确认还书
@@ -878,7 +943,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('借出成功');
-                    getMyBooks()
+                    that.getMyBooks()
                 } else {
                     alert(res.msg)
                 }
@@ -902,7 +967,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('删除成功');
-                    getMyBooks()
+                    that.getMyBooks()
                 } else {
                     alert(res.msg)
                 }
@@ -927,13 +992,13 @@
                 if (res.code === 200) {
                       //赋值给books
                     that.inBox = [];
-                    let book = {};
                     for(let i = 0;i < res.msg.length;i++){
-                    book.id = res.msg[i].id;
-                    book.bookName = res.msg[i].name;
-                    book.user = res.msg[i].lenderid;
-                    book.tag = res.msg[i].status;
-                    that.inBox.push(book);
+                        let book = {};
+                        book.id = res.msg[i].id;
+                        book.bookName = res.msg[i].name;
+                        book.user = res.msg[i].lenderid;
+                        book.tag = res.msg[i].status;
+                        that.inBox.push(book);
                     }
                 } else {
                     alert(res.msg)
@@ -942,6 +1007,15 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+                if(that.inBox){
+                        that.filterTable_inBox = computed(() =>
+                        that.inBox.filter(
+                        (data) =>
+                        !that.search.value ||
+                        data.name.toLowerCase().includes(that.search.value.toLowerCase())
+                    )
+                    )
+                    };
             },
             //拒绝借出
             bookReject ( index, row) {
@@ -959,7 +1033,7 @@
                 let res = response.data
                 if (res.code === 200) {
                     alert('拒绝借出');
-                    getInBox()
+                    that.getInBox()
                 } 
                 else {
                     alert(res.msg)
@@ -998,10 +1072,51 @@
             },
             //这是申请表
             getOutBox(){
-                
+                let that = this;
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/loginUser/books/requireMe`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                      //赋值给books
+                    that.outBox = [];
+                    for(let i = 0;i < res.msg.length;i++){
+                        let book = {};
+                        book.id = res.msg[i].id;
+                        book.name = res.msg[i].name;
+                        book.owner = res.msg[i].ownerid;
+                        book.tag = res.msg[i].status;
+                        book.ISNB = res.msg[i].bookDetail.isbncode; 
+                        book.introduce = res.msg[i].bookDetail.introduce; 
+                        book.src = res.msg[i].bookDetail.image; 
+                        that.outBox.push(book);
+                    }
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                if(that.outBox){
+                        that.filterTable_outBox = computed(() =>
+                        that.outBox.filter(
+                        (data) =>
+                        !that.search.value ||
+                        data.name.toLowerCase().includes(that.search.value.toLowerCase())
+                )
+                )
+                }
             },
 
             chat ( index, row) {
+                sessionStorage.setItem("book", JSON.stringify(row));
+                this.$router.push('/detail')
                 console.log(index, row)
             },
           },

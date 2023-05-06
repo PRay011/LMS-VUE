@@ -6,11 +6,9 @@
             </div>
             <div class="right">
                 <div class="title">欢迎注册</div>
-
-
                 <el-input v-model="account" placeholder="请输入账号" style=""/>
-                <el-input v-model="password" placeholder="请输入密码"/>
-                <el-input v-model="confirmPassword" placeholder="请再次输入密码"/>
+                <el-input v-model="password" placeholder="请输入密码" type="password"/>
+                <el-input v-model="confirmPassword" placeholder="请再次输入密码" type="password"/>
 
                 <div style="margin-top: 15px;"></div>
                 <el-radio-group v-model="category" style="margin-left: 10%;">
@@ -20,10 +18,7 @@
                 <div style="margin-top: 65px;"></div>
                 <el-button class="login" @click="register()">注册</el-button>
                 <el-button class="register" @click="toLogin()">登录</el-button>
-
-
             </div>
-
         </div>
     </div>
 </template>
