@@ -14,6 +14,7 @@
             placeholder="编辑个性签名"
             type="text"
             input-style="color:white"
+            @blur="changeIntroduce()"
             /></div>
         </div>
         <div class="bottom">
@@ -50,7 +51,7 @@
                 </el-table-column>
                 </el-table>
             </el-tab-pane>
-            <el-tab-pane label="我的书籍">
+            <el-tab-pane label="我的书籍"> 
                 <el-table :data="filterTable_Mine" style="width: 100%"  height="500">
                 <el-table-column label="图片" prop="owner"  width="150">
                     <template #default="scope">
@@ -247,9 +248,7 @@
       import {computed, defineComponent } from "vue"
       import '../../utils/selfCenter.js'
       import navigationBar from '../../components/header.vue'
-
-
-      
+      import axios from "axios";
 
       export default defineComponent({
           name: "selfCenter",
@@ -258,11 +257,13 @@
               return {
                     name:'你',
                     introduce:'这是一个自我介绍',
+                    password:'',
                     tabPosition : 'left',
                     left_drawer:false,
                     right_drawer:false,
                     formLabelWidth:'80px',
                     editForm:{
+                            id: '',
                             bookName: '',
                             ISBN: '',
                             category: '',
@@ -278,6 +279,7 @@
                     },
                     borrowRecords: [
                         {
+                            id:1,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '科幻',
@@ -286,6 +288,7 @@
                             tag: 0,
                         },
                         {
+                            id:2,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '母猪的产后护理',
@@ -294,6 +297,7 @@
                             tag: 1,
                         },
                         {
+                            id:3,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '乡村爱情',
@@ -302,6 +306,7 @@
                             tag: 2,
                         },
                         {
+                            id:4,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '悬疑',
@@ -318,6 +323,7 @@
                             tag: 0,
                         },
                         {
+                            id:5,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '母猪的产后护理',
@@ -326,6 +332,7 @@
                             tag: 1,
                         },
                         {
+                            id:6,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '乡村爱情',
@@ -334,6 +341,7 @@
                             tag: 2,
                         },
                         {
+                            id:7,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '悬疑',
@@ -342,6 +350,7 @@
                             tag: 0,
                         },
                         {
+                            id:8,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '科幻',
@@ -350,6 +359,7 @@
                             tag: 0,
                         },
                         {
+                            id:9,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '母猪的产后护理',
@@ -358,6 +368,7 @@
                             tag: 1,
                         },
                         {
+                            id:10,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '乡村爱情',
@@ -366,6 +377,7 @@
                             tag: 2,
                         },
                         {
+                            id:11,
                             startDate: '2023-05-03',
                             endDate: '2023-05-04',
                             category: '悬疑',
@@ -376,6 +388,7 @@
                         ],
                     myBooks: [
                         {
+                            id:1,
                             image:'/1.jpg',
                             ISBN: '2023120503',
                             category: '科幻',
@@ -385,6 +398,7 @@
                             tag: 0,
                         },
                         {
+                            id:2,
                             image:'/1.jpg',
                             ISBN: '20231206756',
                             category: '母猪的产后护理',
@@ -394,6 +408,7 @@
                             tag: 1,
                         },
                         {
+                            id:3,
                             image:'/1.jpg',
                             ISBN: '1243124124',
                             category: '乡村爱情',
@@ -403,6 +418,7 @@
                             tag: 2,
                         },
                         {
+                            id:4,
                             image:'1.jpg',
                             ISBN: '2023112312',
                             category: '悬疑',
@@ -412,6 +428,7 @@
                             tag: 0,
                         },
                         {
+                            id:5,
                             image:'/1.jpg',
                             ISBN: '2023345353',
                             category: '乡村爱情',
@@ -421,6 +438,7 @@
                             tag: 2,
                         },
                         {
+                            id:6,
                             image:'1.jpg',
                             ISBN: '2027389246',
                             category: '悬疑',
@@ -431,32 +449,38 @@
                         },
                         ],
                     inBox: [
-                    {
+                        {
+                            id: 1,
                             user: '2023120503',
                             bookName: '人工智障',
                             tag: 0,
                         },
                         {
+                            id: 2,
                             user: '20231206756',
                             bookName: '从小学习C++',
                             tag: 1,
                         },
                         {
+                            id: 3,
                             user: '1243124124',
                             bookName: '浪漫地球',
                             tag: -1,
                         },
                         {
+                            id: 4,
                             user: '2023112312',
                             bookName: '憨豆先生',
                             tag: 0,
                         },
                         {
+                            id: 5,
                             user: '2023345353',
                             bookName: '浪漫地球',
                             tag: -1,
                         },
                         {
+                            id: 6,
                             user: '2027389246',
                             bookName: '憨豆先生',
                             tag: 0,
@@ -503,12 +527,106 @@
           },
           components: {navigationBar},
           mounted:function(){
-            this.ready()
+            this.ready();
+            //借书记录表单
+            this.getBorrowBooks();
+            //我的书籍
+            this.getMyBooks();
+            //信箱-收件箱
+            this.getInBox();
+            //信箱-申请表
+            this.getOutBox();
          },
           methods: {
             ready(){
                 let that = this;
-                //借书记录表单
+                let login = JSON.parse(sessionStorage.getItem("user"));
+                login = true;
+                if(login){
+                      //个人信息
+                    let config = {
+                        method: 'get',
+                        url: `http://localhost:5000/loginUser/account`,
+                        headers: {
+                        },
+                    };
+                    axios(config)
+                    .then(function (response) {
+                    let res = response.data
+                    if (res.code === 200) {
+                        that.name = res.msg.id;
+                        that.introduce = res.msg.introduce;
+                        that.password = res.msg.password;
+                    } else {
+                        alert(res.msg)
+                    }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                    //
+                    if(that.inBox){
+                        that.filterTable_inBox = computed(() =>
+                        that.inBox.filter(
+                        (data) =>
+                        !that.search.value ||
+                        data.name.toLowerCase().includes(that.search.value.toLowerCase())
+                    )
+                    )
+                    };
+                    if(that.outBox){
+                        that.filterTable_outBox = computed(() =>
+                        that.outBox.filter(
+                        (data) =>
+                        !that.search.value ||
+                        data.name.toLowerCase().includes(that.search.value.toLowerCase())
+                    )
+                    )
+                    }
+                }
+                else{
+                    alert('请先登录');
+                    that.$router.push('/login')
+                }
+                
+              
+               
+            },
+
+            //修改个人信息
+            changeIntroduce(){
+                let that = this;
+                let data={
+                    introduce: that.introduce
+                };
+
+                let config = {
+                    method: 'put',
+                    url: `http://localhost:5000/loginUser/account`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:data
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('修改成功');
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+
+            //借书记录
+            getBorrowBooks(){
+                let that = this;
                 let config = {
                     method: 'get',
                     url: `http://localhost:5000/loginUser/list`,
@@ -521,16 +639,16 @@
                 if (res.code === 200) {
                     //赋值给books
                     that.borrowRecords = [];
-                    let book = {};
                     for(let i = 0;i < res.msg.length;i++){
-                    book.id = res.msg[i].id;
-                    book.startDate = res.msg[i].date;
-                    book.endDate = res.msg[i].return_deadline;
-                    book.category = res.msg[i].type;
-                    book.bookName = res.msg[i].bookname;
-                    book.owner = res.msg[i].ownerid;
-                    book.tag = res.msg[i].status;
-                    that.borrowRecords.push(book);
+                        let book = {};
+                        book.id = res.msg[i].id;
+                        book.startDate = res.msg[i].date;
+                        book.endDate = res.msg[i].return_deadline;
+                        book.category = res.msg[i].type;
+                        book.bookName = res.msg[i].bookname;
+                        book.owner = res.msg[i].ownerid;
+                        book.tag = res.msg[i].status;
+                        that.borrowRecords.push(book);
                     }
                 } else {
                     alert(res.msg)
@@ -548,7 +666,66 @@
                 )
                 )
                 };
+            },
 
+            postpone ( index, row) {
+                console.log('延期');
+                let bookID = row.id;
+                let config = {
+                    method: 'put',
+                    url: `http://localhost:5000/loginUser/list/${bookID}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('成功延期一个月');
+                    borrowBooks()
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+
+            //我的书籍按钮
+            getMyBooks(){
+                let that = this;
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/loginUser/books/mine`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    //赋值给books
+                    that.myBooks = [];
+                    for(let i = 0;i < res.msg.length;i++){
+                        let book = {};
+                        book.id = res.msg[i].id;
+                        book.image = res.msg[i].image;
+                        book.ISBN = res.msg[i].isbncode;
+                        book.category = res.msg[i].type;
+                        book.bookName = res.msg[i].name;
+                        book.introduce = res.msg[i].introduce;
+                        book.user = res.msg[i].lenderid;
+                        book.tag = res.msg[i].status;
+                        that.myBooks.push(book);
+                    }
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 if(that.myBooks){
                     that.filterTable_Mine = computed(() =>
                     that.myBooks.filter(
@@ -558,34 +735,11 @@
                 )
                 )
                 };
-                if(that.inBox){
-                    that.filterTable_inBox = computed(() =>
-                    that.inBox.filter(
-                    (data) =>
-                    !that.search.value ||
-                    data.name.toLowerCase().includes(that.search.value.toLowerCase())
-                )
-                )
-                };
-                if(that.outBox){
-                    that.filterTable_outBox = computed(() =>
-                    that.outBox.filter(
-                    (data) =>
-                    !that.search.value ||
-                    data.name.toLowerCase().includes(that.search.value.toLowerCase())
-                )
-                )
-                }
-               
             },
-            //这是借书记录按钮
-            postpone ( index, row) {
-                console.log('延期');
-                console.log(index, row)
-            },
-            //我的书籍按钮
+
             //修改
             bookEdit ( index, row) {
+                this.editForm.id = row.id;
                 this.editForm.image= row.image;
                 this.editForm.ISBN = row.ISBN;
                 this.editForm.category = row.category;
@@ -593,12 +747,45 @@
                 this.editForm.introduce = row.introduce;
                 this.left_drawer = true
             },
+
             comfirmEdit(){
+                let that = this;
+                let data={
+                    bookId: that.editForm.id,
+                    name: that.editForm.bookName,
+                    isbncode: that.editForm.ISBN,
+                    type: that.editForm.category,
+                    introduce: that.editForm.introduce,
+                    imagePath: that.editForm.image
+                };
+                let config = {
+                    method: 'put',
+                    url: `http://localhost:5000/loginUser/book`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:data
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('修改成功');
+                    getMyBooks()
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 this.left_drawer = false
             },
+
             cancelEdit(){
                 this.left_drawer = false
             },
+            //图片保存至本地还没写
             uploadChange(){
                 let that = this;
                 let input = document.createElement("input");
@@ -615,17 +802,50 @@
                 });
                 input.click();
             },
+            
             //添加新书
             addNew(){
                 let that = this;
                 that.right_drawer = true;
             },
+
             comfirmAdd(){
+                let that = this;
+                let data={
+                    name: that.addForm.bookName,
+                    isbncode: that.addForm.ISBN,
+                    type: that.addForm.category,
+                    introduce: that.addForm.introduce,
+                    imagePath: that.addForm.image
+                };
+                let config = {
+                    method: 'post',
+                    url: `http://localhost:5000/loginUser/book`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:data
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('添加成功');
+                    getMyBooks();
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 this.right_drawer = false
             },
+
             cancelAdd(){
                 this.right_drawer = false
             },
+             //图片保存至本地也还没写
             uploadAdd(){
                 let that = this;
                 let input = document.createElement("input");
@@ -642,23 +862,153 @@
                 });
                 input.click();
             },
-           
+
+            //确认还书
             bookComfirm ( index, row) {
-                console.log('确认借出');
-                console.log(index, row)
+                let that = this;
+                let bookId = row.id;
+                let config = {
+                    method: 'put',
+                    url: `http://localhost:5000/loginUser/books/returnBookToMe/${bookId}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('借出成功');
+                    getMyBooks()
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
+            //删除上传书籍
             bookDelete ( index, row) {
-                console.log('删除');
-                console.log(index, row)
+                let that = this;
+                let bookId = row.id;
+                let config = {
+                    method: 'delete',
+                    url: `http://localhost:5000/loginUser/book/${bookId}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('删除成功');
+                    getMyBooks()
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
+
             //这是收件箱
+            getInBox(){
+                let that = this;
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/loginUser/books/requireMe`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                      //赋值给books
+                    that.inBox = [];
+                    let book = {};
+                    for(let i = 0;i < res.msg.length;i++){
+                    book.id = res.msg[i].id;
+                    book.bookName = res.msg[i].name;
+                    book.user = res.msg[i].lenderid;
+                    book.tag = res.msg[i].status;
+                    that.inBox.push(book);
+                    }
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            //拒绝借出
             bookReject ( index, row) {
+                let that = this;
+                let requireId = row.user;
+                let bookId = row.id;
+                let status = row.tag;
+                let config = {
+                    method: 'get',
+                    url: `http://localhost:5000/loginUser/books/checkRequire/${requireId}/${bookId}/${2}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                      //赋值给books
+                    that.inBox = [];
+                    for(let i = 0;i < res.msg.length;i++){
+                        let book = {};
+                        book.id = res.msg[i].id;
+                        book.bookName = res.msg[i].name;
+                        book.user = res.msg[i].lenderid;
+                        book.tag = res.msg[i].status;
+                        that.inBox.push(book);
+                    }
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 console.log(index, row)
             },
             bookAgree ( index, row) {
+                let that = this;
+                let requireId = row.user;
+                let bookId = row.id;
+                let status = row.tag;
+                let config = {
+                    method: 'put',
+                    url: `http://localhost:5000/loginUser/books/checkRequire/${requireId}/${bookId}/${status}`,
+                    headers: {
+                    },
+                };
+                axios(config)
+                .then(function (response) {
+                let res = response.data
+                if (res.code === 200) {
+                    alert('借出成功');
+                    getMyBooks()
+                } else {
+                    alert(res.msg)
+                }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 console.log(index, row)
             },
             //这是申请表
+            getOutBox(){
+
+            },
+
             chat ( index, row) {
                 console.log(index, row)
             },

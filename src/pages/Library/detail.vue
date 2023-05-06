@@ -72,6 +72,7 @@
     import { defineComponent } from "vue"
     import '../../utils/detail.js'
     import navigationBar from '../../components/header.vue'
+    import axios from "axios";
       
     export default defineComponent({
         name: "detail",

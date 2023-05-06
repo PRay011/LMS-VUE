@@ -135,6 +135,7 @@
   import { defineComponent } from "vue"
   import '../../utils/library.js'
   import navigationBar from '../../components/header.vue'
+  import axios from "axios";
 
   export default defineComponent({
       name: "library",
@@ -241,8 +242,8 @@
           if (res.code === 200) {
             //赋值给books
             that.books = [];
-            let book = {};
             for(let i = 0;i < res.msg.books.length;i++){
+              let book = {};
               book.image = res.msg.books[i].image;
               book.introduce = res.msg.books[i].introduce;
               book.ISBN = res.msg.books[i].isbncode;

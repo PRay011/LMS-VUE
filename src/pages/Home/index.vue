@@ -161,8 +161,8 @@ export default defineComponent({
           if (res.code === 200) {
             //赋值给recommend
             that.recommend = [];
-            let book = {};
             for(let i = 0;i < res.msg.books.length;i++){
+              let book = {};
               book.image = res.msg.books[i].image;
               book.introduce = res.msg.books[i].introduce;
               book.ISBN = res.msg.books[i].isbncode;
