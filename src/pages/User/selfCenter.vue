@@ -1054,7 +1054,11 @@
                         for (let i = 0; i < res.msg.length; i++) {
                             let book = {};
                             book.id = res.msg[i].bookid;
+<<<<<<< HEAD
                             book.bookName = res.msg[i].bookname;
+=======
+                            book.bookName = res.msg[i].name;
+>>>>>>> ed47d54ca2a1e44cd09872f9c3b34bb958ed8cb4
                             book.user = res.msg[i].lenderid;
                             book.tag = res.msg[i].status;
                             that.inBox.push(book);
