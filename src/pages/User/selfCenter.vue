@@ -176,7 +176,7 @@
     <el-drawer
             ref="drawerRef"
             v-model="left_drawer"
-            title="I have a nested form inside!"
+            title="修改图书"
             :before-close="handleClose"
             direction="ltr"
             class="demo-drawer"
@@ -185,7 +185,7 @@
             <el-form :model="editForm">
                 <div class="alert-box-item">
                     <input @change="uploadFile($event)" type="file" class="selectImageButton">
-                    <img :src=valueUrl v-if="valueUrl" class="uploadImageBox">
+                    <img :src='editForm.image' v-if="valueUrl" class="uploadImageBox">
                 </div>
                 <el-form-item label="书名" :label-width="formLabelWidth">
                     <el-input v-model="editForm.bookName" autocomplete="off"/>
@@ -214,7 +214,7 @@
     <el-drawer
             ref="drawerRef"
             v-model="right_drawer"
-            title="I have a nested form inside!"
+            title="添加图书"
             :before-close="handleClose"
             direction="rtl"
             class="demo-drawer"
@@ -228,7 +228,7 @@
                 <!--                </el-form-item>-->
                 <div class="alert-box-item">
                     <input @change="uploadAdd($event)" type="file" class="selectImageButton">
-                    <img :src="addForm.image" width="200" height="300" class="head_pic"/>
+                    <img :src="addForm" width="200" height="300" class="head_pic"/>
                 </div>
                 <el-form-item label="书名" :label-width="formLabelWidth">
                     <el-input v-model="addForm.bookName" autocomplete="off"/>
@@ -600,7 +600,7 @@
                 let that = this;
                 let login = JSON.parse(sessionStorage.getItem("user"));
                 console.log(login)
-                if(login!=0||login!=1||login!=2||login!=3){
+                if(login==0||login==1||login==2||login==3){
                       //个人信息
                     let config = {
                         method: 'get',
@@ -1054,11 +1054,7 @@
                         for (let i = 0; i < res.msg.length; i++) {
                             let book = {};
                             book.id = res.msg[i].bookid;
-<<<<<<< HEAD
                             book.bookName = res.msg[i].bookname;
-=======
-                            book.bookName = res.msg[i].name;
->>>>>>> ed47d54ca2a1e44cd09872f9c3b34bb958ed8cb4
                             book.user = res.msg[i].lenderid;
                             book.tag = res.msg[i].status;
                             that.inBox.push(book);
