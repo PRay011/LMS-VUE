@@ -792,7 +792,7 @@
                     for(let i = 0;i < res.msg.length;i++){
                         let book = {};
                         book.id = res.msg[i].id;
-                        book.image = res.msg[i].image;
+                        book.image = `http://localhost:5000${res.msg[i].image}`;
                         book.ISBN = res.msg[i].isbncode;
                         book.category = res.msg[i].type;
                         book.bookName = res.msg[i].name;
@@ -830,43 +830,43 @@
                 this.left_drawer = true
             },
 
-        comfirmEdit() {
-            let that = this;
-            if (that.editForm.bookName == '' || that.editForm.ISBN == '' || that.editForm.category == '' || that.editForm.introduce == '' || that.editForm.image == '') {
-                alert('内容不能为空')
-            } else {
-                let data = {
-                    bookId: that.editForm.id,
-                    name: that.editForm.bookName,
-                    isbncode: that.editForm.ISBN,
-                    type: that.editForm.category,
-                    introduce: that.editForm.introduce,
-                    imagePath: that.imageSavePath
-                };
-                let config = {
-                    method: 'put',
-                    url: `http://localhost:5000/loginUser/book`,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data:data
-                };
-                axios(config)
-                    .then(function (response) {
-                        let res = response.data
-                        if (res.code === 200) {
-                            alert('修改成功');
-                            that.getMyBooks()
-                        } else {
-                            alert(res.msg)
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                this.left_drawer = false
-            }
-        },
+            comfirmEdit() {
+                let that = this;
+                if (that.editForm.bookName == '' || that.editForm.ISBN == '' || that.editForm.category == '' || that.editForm.introduce == '' || that.editForm.image == '') {
+                    alert('内容不能为空')
+                } else {
+                    let data = {
+                        bookId: that.editForm.id,
+                        name: that.editForm.bookName,
+                        isbncode: that.editForm.ISBN,
+                        type: that.editForm.category,
+                        introduce: that.editForm.introduce,
+                        imagePath: that.imageSavePath
+                    };
+                    let config = {
+                        method: 'put',
+                        url: `http://localhost:5000/loginUser/book`,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data:data
+                    };
+                    axios(config)
+                        .then(function (response) {
+                            let res = response.data
+                            if (res.code === 200) {
+                                alert('修改成功');
+                                that.getMyBooks()
+                            } else {
+                                alert(res.msg)
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    this.left_drawer = false
+                }
+            },
 
         cancelEdit() {
             this.left_drawer = false
@@ -1053,8 +1053,8 @@
                         that.inBox = [];
                         for (let i = 0; i < res.msg.length; i++) {
                             let book = {};
-                            book.id = res.msg[i].id;
-                            book.bookName = res.msg[i].name;
+                            book.id = res.msg[i].bookid;
+                            book.bookName = res.msg[i].bookname;
                             book.user = res.msg[i].lenderid;
                             book.tag = res.msg[i].status;
                             that.inBox.push(book);

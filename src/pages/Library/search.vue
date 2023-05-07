@@ -182,7 +182,7 @@ export default defineComponent({
                             that.books = [];
                             for (let i = 0; i < res.msg.books.length; i++) {
                                 let book = {};
-                                book.image = res.msg.books[i].image;
+                                book.src = `http://localhost:5000${res.msg.books[i].image}`;
                                 book.introduce = res.msg.books[i].introduce;
                                 book.ISBN = res.msg.books[i].isbncode;
                                 book.owner = res.msg.books[i].ownerid;
